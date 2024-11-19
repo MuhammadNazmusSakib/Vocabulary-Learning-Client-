@@ -5,34 +5,38 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import 'react-toastify/dist/ReactToastify.css';
+
 import Root from './Component/Root/Root';
 import Home from './Component/Home/Home';
 import Tutorials from './Component/Routes/Tutorials';
-import StartLearning from './Component/Routes/StartLearning';
 import AboutUs from './Component/Routes/AboutUs';
 import LessonDetail from './Component/PrivateRoutes/LessonDetail';
 import LessonsPage from './Component/Home/HomeComponents/Lessonspage';
+import Login from './Component/Routes/SignIn&SignUp/Login';
+import Register from './Component/Routes/SignIn&SignUp/Register';
+import DataProvider from './Component/ContexApi/DataProvider';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root/>,
+    element: <Root />,
     children: [
       {
         path: "/",
-        element: <Home/>
+        element: <Home />
       },
       {
         path: "/start-learning",
-        element: <LessonsPage/>
+        element: <LessonsPage />
       },
       {
         path: "/tutorials",
-        element: <Tutorials/>
+        element: <Tutorials />
       },
       {
         path: "/about-us",
-        element: <AboutUs/>
+        element: <AboutUs />
       },
       // {
       //   path: "/lessons",
@@ -40,14 +44,24 @@ const router = createBrowserRouter([
       // },
       {
         path: "/lesson/:lesson_no",
-        element: <LessonDetail/>
+        element: <LessonDetail />
       }
-    ]
+    ],
   },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/signup",
+    element: <Register />
+  }
 ]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <DataProvider>
+      <RouterProvider router={router} />
+    </DataProvider>
   </StrictMode>,
 )

@@ -6,13 +6,11 @@ import Footer from '../Footer/Footer'
 
 const Root = () => {
   return (
-    <DataProvider>
         <div>
             <Header/>
             <Outlet/>
             <Footer/>
         </div>
-    </DataProvider>
   )
 }
 
