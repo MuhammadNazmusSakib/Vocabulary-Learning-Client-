@@ -6,7 +6,8 @@ import { toast } from 'react-toastify';
 const Register = () => {
   const navigate = useNavigate();
   const location = useLocation()
-  const { setUser, createNewUser} = useContext(Contex)
+  const { setUser, createNewUser, updateUserProfile} = useContext(Contex)
+  const [error, setError] = useState({})
   
   // const [formData, setFormData] = useState({
   //   name: '',
@@ -25,20 +26,7 @@ const Register = () => {
   //   });
   // };
 
-  //       Validate password
-  
-  const validatePassword = (password) => {
-    if (password.length < 6) {
-      return 'Password must be at least 6 characters long.';
-    }
-    if (!/[A-Z]/.test(password)) {
-      return 'Password must have at least one uppercase letter.';
-    }
-    if (!/[a-z]/.test(password)) {
-      return 'Password must have at least one lowercase letter.';
-    }
-    return '';
-  };
+
 
   // Handle form submission
   const handleSubmit = (e) => {
@@ -49,12 +37,32 @@ const Register = () => {
     const email = form.get("email")
     const photo = form.get("photo")
     const password = form.get("password")
+    if (password.length < 6) {
+      setError({...error, name: 'Password must be at least 6 characters long.'})
+      return
+    }
+    if (!/[A-Z]/.test(password)) {
+      setError({...error, name: 'Password must have at least one uppercase letter.'})
+      return 
+    }
+    if (!/[a-z]/.test(password)) {
+      setError({...error, name: 'Password must have at least one lowercase letter.'}) 
+      return
+    }
   
 
     createNewUser(email, password)
     .then(result => {
       const user = result.user
       setUser(user)
+
+      updateUserProfile({displayName: name, photoURL: photo})
+      .then(() => {
+        navigate("/")
+      }).catch((error) => {
+        console.log(error)
+      })
+
       const redirectPath = location.state?.from || "/"
       navigate(redirectPath)
     })
@@ -161,9 +169,9 @@ const Register = () => {
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
               required
             />
-            {/* {passwordError && (
-              <p className="text-red-500 text-sm mt-1">{passwordError}</p>
-            )} */}
+            {error.name && (
+              <p className="text-red-500 text-sm mt-1">{error.name}</p>
+            )}
           </div>
 
           {/* Register Button */}

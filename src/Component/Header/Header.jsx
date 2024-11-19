@@ -41,11 +41,11 @@ const Header = () => {
                     {
                         user ? (
                             <>
-                                <Link to="/my-profile" className="btn bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 mr-3">
-                                    <img src="" alt="" />
+                                <Link to="/my-profile" className="btn flex items-center gap-3 py-2 px-4 rounded hover:text-blue-600 mr-3">
+                                    <img src={user?.photoURL} className='rounded-full w-8' />
                                     <p>My profile</p>
                                 </Link>
-                                <button onClick={logOut} className="btn bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+                                <button onClick={logOut} className="btn bg-blue-500 text-white py-1 px-4 rounded hover:bg-blue-600">
                                     LogOut
                                 </button>
                             </>
