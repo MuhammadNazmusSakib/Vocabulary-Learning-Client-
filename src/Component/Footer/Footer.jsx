@@ -62,7 +62,7 @@ const Footer = () => {
                     </div>
                 </div>
                 <p className="mt-10 text-gray-400 text-center">
-                    © 2024 YourApp. All rights reserved.
+                    © 2024 Lingo Bingo. All rights reserved.
                 </p>
             </div>
         </footer>

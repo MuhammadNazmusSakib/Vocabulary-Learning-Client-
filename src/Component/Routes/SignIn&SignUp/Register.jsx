@@ -1,11 +1,12 @@
 import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Contex } from '../../ContexApi/Contex';
-// import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const Register = () => {
   const navigate = useNavigate();
-  const {createNewUser} = useContext(Contex)
+  const location = useLocation()
+  const { setUser, createNewUser} = useContext(Contex)
   
   // const [formData, setFormData] = useState({
   //   name: '',
@@ -24,19 +25,20 @@ const Register = () => {
   //   });
   // };
 
-  //                                Validate password
-  // const validatePassword = (password) => {
-  //   if (password.length < 6) {
-  //     return 'Password must be at least 6 characters long.';
-  //   }
-  //   if (!/[A-Z]/.test(password)) {
-  //     return 'Password must have at least one uppercase letter.';
-  //   }
-  //   if (!/[a-z]/.test(password)) {
-  //     return 'Password must have at least one lowercase letter.';
-  //   }
-  //   return '';
-  // };
+  //       Validate password
+  
+  const validatePassword = (password) => {
+    if (password.length < 6) {
+      return 'Password must be at least 6 characters long.';
+    }
+    if (!/[A-Z]/.test(password)) {
+      return 'Password must have at least one uppercase letter.';
+    }
+    if (!/[a-z]/.test(password)) {
+      return 'Password must have at least one lowercase letter.';
+    }
+    return '';
+  };
 
   // Handle form submission
   const handleSubmit = (e) => {
@@ -47,17 +49,25 @@ const Register = () => {
     const email = form.get("email")
     const photo = form.get("photo")
     const password = form.get("password")
-    console.log({name,email, photo, password})
+  
 
     createNewUser(email, password)
     .then(result => {
       const user = result.user
-      console.log(user)
+      setUser(user)
+      const redirectPath = location.state?.from || "/"
+      navigate(redirectPath)
     })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode, errorMessage)
+    .catch(() => {
+      toast("Registar Failed ! Please try again.", {
+        position: "top-center",
+        autoClose: 2000, // Close after 2 seconds
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     });
 
     // const error = validatePassword(formData.password);
@@ -132,7 +142,7 @@ const Register = () => {
               placeholder="Enter a photo URL"
               // value={formData.photoURL}
               // onChange={handleInputChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required
             />
           </div>
 
@@ -176,7 +186,7 @@ const Register = () => {
         </div>
 
         {/* Redirect to Login */}
-        <p className="text-center text-sm text-gray-600 mt-4">
+        <div className="text-center text-sm text-gray-600 mt-4">
           Already have an account?{' '}
           <button
             className="text-blue-500 hover:underline"
@@ -184,7 +194,7 @@ const Register = () => {
           >
             Log in
           </button>
-        </p>
+        </div>
       </div>
     </div>
   );

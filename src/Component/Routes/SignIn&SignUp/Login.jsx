@@ -1,11 +1,47 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Contex } from "../../ContexApi/Contex";
+import { toast } from 'react-toastify'
 
 const Login = () => {
+
+  const {userLogin, setUser} = useContext(Contex)
+  const location = useLocation()
+  const navigate = useNavigate()
+
   const handleGoogleLogin = () => {
     alert("Google login clicked!");
     // Add Google login logic here
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    const form = new FormData(e.target)
+    const email = form.get("email")
+    const password = form.get("password")
+  
+
+    userLogin(email, password)
+    .then(result => {
+      const user = result.user
+      setUser(user)
+      const redirectPath = location.state?.from || "/"
+      navigate(redirectPath)
+    })
+    .catch(() => {
+      toast("Incorrect Email or Password. Please try again.",{
+        position: "top-center",
+        autoClose: 2000, // Close after 2 seconds
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    
+    })
+  }
 
 
   return (
@@ -40,7 +76,7 @@ const Login = () => {
         </div>
 
         {/* Login Form */}
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
               htmlFor="email"
@@ -51,6 +87,7 @@ const Login = () => {
             <input
               type="email"
               id="email"
+              name="email"
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Enter your email"
             />
@@ -65,6 +102,7 @@ const Login = () => {
             <input
               type="password"
               id="password"
+              name="password"
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Enter your password"
             />

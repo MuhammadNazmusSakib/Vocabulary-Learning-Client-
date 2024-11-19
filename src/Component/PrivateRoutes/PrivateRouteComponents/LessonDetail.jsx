@@ -112,7 +112,7 @@ const LessonDetail = () => {
       <div className="flex justify-center mt-8">
         <button
           className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg"
-          onClick={() => navigate('/start-learning')}
+          onClick={() => navigate('/lesson')}
         >
           Back to Lessons
         </button>
