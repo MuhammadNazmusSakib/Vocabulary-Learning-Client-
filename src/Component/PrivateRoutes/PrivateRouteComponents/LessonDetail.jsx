@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import logo from '../../../assets/image/main-logo.png'
+import { IoLogoTwitter } from 'react-icons/io';
+import { RiUserVoiceFill } from 'react-icons/ri';
 
 const LessonDetail = () => {
   const { lesson_no } = useParams();
@@ -48,27 +51,38 @@ const LessonDetail = () => {
     }
   };
 
+  // Pronounce the word when clicked
+  const handlePronounce = (word) => {
+    const utterance = new SpeechSynthesisUtterance(word)
+    utterance.lang = "de-DE"; // Set language to German
+    speechSynthesis.speak(utterance)
+  }
+
   return (
     <div className="container mx-auto py-10 px-4">
       {/* Page Title */}
-      <h1 className="text-4xl font-bold text-center mb-12">
-        Lesson {lesson_no}
-      </h1>
-
+      <div className="flex items-center text-4xl font-bold justify-center gap-3 mb-12">
+        <h1>Lesson {lesson_no}</h1>
+        <img src={logo} className='w-14' />
+      </div>
       {/* Vocabulary Cards */}
       {filteredVocabularies.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">
           {filteredVocabularies.map((word) => (
-            <div
+            <div onClick={() => handlePronounce(word.word)}
               key={word.id}
               className={`cursor-pointer ${getDifficultyColor(
                 word.difficulty
               )} rounded-lg shadow-md p-6`}
             >
-              <h2 className="text-2xl font-bold">{word.word}</h2>
+              <div className='flex items-center place-content-between'>
+                <h2 className="text-2xl font-bold">{word.word}</h2>
+                <RiUserVoiceFill className='text-red-500 text-2xl' />
+              </div>
               <p className="italic">Pronunciation: {word.pronunciation}</p>
               <p>Meaning: {word.meaning}</p>
               <p>Part of Speech: {word.part_of_speech}</p>
+              <p>Difficulty: {word.difficulty}</p>
 
               {/* When to say button */}
               <button
@@ -89,6 +103,7 @@ const LessonDetail = () => {
         <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-8 rounded-lg shadow-lg w-11/12 max-w-lg">
             <h2 className="text-3xl font-bold mb-4">{selectedWord.word}</h2>
+            <p className="italic"><strong>Pronunciation: </strong>{selectedWord.pronunciation}</p>
             <p>
               <strong>Meaning:</strong> {selectedWord.meaning}
             </p>

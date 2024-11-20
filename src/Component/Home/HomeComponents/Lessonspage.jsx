@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import logo from '../../../assets/image/main-logo.png'
 
 const LessonsPage = () => {
   const navigate = useNavigate();
@@ -18,7 +19,10 @@ const LessonsPage = () => {
   return (
     <div className="container mx-auto py-10 px-4">
       {/* Page Title */}
-      <h1 className="text-4xl font-bold text-center mb-12">Let’s Learn</h1>
+      <div className="flex items-center text-4xl font-bold justify-center gap-3 mb-12">
+        <h1>Let’s Learn with Lingo Bingo</h1>
+        <img src={logo} className='w-14' />
+      </div>
 
       {/* Lessons Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-12">
