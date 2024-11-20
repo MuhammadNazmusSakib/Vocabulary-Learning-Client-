@@ -56,14 +56,14 @@ const Login = () => {
         <div className="w-full mb-4">
           <button
             onClick={handleGoogleLogin}
-            className="flex w-full items-center bg-lime-500 text-white px-4 py-2 rounded-lg shadow hover:bg-lime-600 mr-2"
+            className="flex gap-4 w-full justify-center items-center bg-lime-500 text-white px-4 py-2 rounded-lg shadow hover:bg-lime-600 mr-2"
           >
             <img
               src="https://img.icons8.com/color/24/google-logo.png"
               alt="Google"
-              className="ml-20 mr-5"
+              className=""
             />
-            Sign in with Google
+            <p className="">Sign in with Google</p>
           </button>
           
         </div>
