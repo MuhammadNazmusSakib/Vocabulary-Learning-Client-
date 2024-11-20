@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { Contex } from './Contex'
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { auth } from '../Firebase/firebase.config';
 
 
 const DataProvider = ({ children }) => {
 
+  const provider = new GoogleAuthProvider();
+
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
-   console.log(user)
+  //  console.log(user)
 
   const createNewUser = (email, password) => {
     // console.log("dfdy")
@@ -38,8 +40,19 @@ const DataProvider = ({ children }) => {
     return updateProfile(auth.currentUser, updateData)
   }
 
+  //  Google signIn
+  const googleSignIn = () => {
+    // console.log("gfyug")
+    return signInWithPopup(auth, provider)
+  }
+
+  // Forgot Password..
+  const resetPassword = (email) => {
+    return sendPasswordResetEmail(auth, email)
+  }
+
   const contexApiData = {
-    user, setUser, createNewUser, logOut, userLogin, loading, updateUserProfile
+    user, setUser, createNewUser, logOut, userLogin, loading, updateUserProfile, googleSignIn, resetPassword
   }
   return (
     <Contex.Provider value={contexApiData}>

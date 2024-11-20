@@ -1,18 +1,36 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Contex } from "../../ContexApi/Contex";
 import { toast } from 'react-toastify'
 
 const Login = () => {
 
-  const {userLogin, setUser} = useContext(Contex)
+  const { userLogin, setUser, googleSignIn } = useContext(Contex)
+  const [forgotPassword, setForgotPassword] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
 
+  //  Handle Google Login 
   const handleGoogleLogin = () => {
-    alert("Google login clicked!");
-    // Add Google login logic here
+    googleSignIn()
+      .then((result) => {
+        const user = result.user
+        setUser(user)
+
+        const redirectPath = location.state?.from || "/"
+        navigate(redirectPath)
+      })
+      .catch(() => {
+        toast('Google login Failed. Please try again.');
+      })
   };
+
+  // Forgot Password?.......
+  const handleNavigateToForgotPassword = () => {
+    setForgotPassword(true)
+    console.log(forgotPassword)
+  }
+
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -20,27 +38,37 @@ const Login = () => {
     const form = new FormData(e.target)
     const email = form.get("email")
     const password = form.get("password")
-  
+    
+    // Forgot Password...
+    if (forgotPassword) {
+      return navigate('/forgot-password', { state: { email } })
+    }
+
 
     userLogin(email, password)
-    .then(result => {
-      const user = result.user
-      setUser(user)
-      const redirectPath = location.state?.from || "/"
-      navigate(redirectPath)
-    })
-    .catch(() => {
-      toast("Incorrect Email or Password. Please try again.",{
-        position: "top-center",
-        autoClose: 2000, // Close after 2 seconds
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-    
-    })
+      .then(result => {
+        const user = result.user
+        setUser(user)
+        const redirectPath = location.state?.from || "/"
+        navigate(redirectPath)
+      })
+      .catch(() => {
+        toast("Incorrect Email or Password. Please try again.", {
+          position: "top-center",
+          autoClose: 2000, // Close after 2 seconds
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+
+      })
+  }
+
+  // Redirect to Register with Location State
+  const handleNavigateToRegister = () => {
+    navigate('/signup', { state: { from: location.state?.from || '/' } });
   }
 
 
@@ -65,7 +93,7 @@ const Login = () => {
             />
             <p className="">Sign in with Google</p>
           </button>
-          
+
         </div>
 
         {/* Divider */}
@@ -117,12 +145,11 @@ const Login = () => {
                 Remember me on this computer
               </span>
             </label>
-            <a
-              href="#"
+            <button onClick={handleNavigateToForgotPassword}
               className="text-sm text-green-500 hover:underline"
             >
               Forgot your password?
-            </a>
+            </button>
           </div>
           <button
             type="submit"
@@ -135,11 +162,11 @@ const Login = () => {
         {/* Sign Up Link */}
         <p className="text-center text-sm text-gray-700 mt-4">
           Don't have an account yet?{" "}
-          <Link to="/signup">
-          <p className="text-green-500 font-medium hover:underline">
-            Sign up. It's free and takes five seconds.
-          </p>
-          </Link>
+          <button onClick={handleNavigateToRegister}>
+            <p className="text-green-500 font-medium hover:underline">
+              Sign up. It's free and takes five seconds.
+            </p>
+          </button>
         </p>
       </div>
     </div>

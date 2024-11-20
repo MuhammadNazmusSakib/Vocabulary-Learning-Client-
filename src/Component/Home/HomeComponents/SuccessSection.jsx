@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CountUp from 'react-countup';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const SuccessSection = () => {
+
+    useEffect(() => {
+        AOS.init({
+          duration: 2000, // Animation duration in milliseconds
+          once: true,     // Whether animation should happen only once
+        });
+      }, []);
+
     return (
         <section className="bg-blue-100 py-16 px-6 md:px-12 lg:px-24">
-            <div className="max-w-5xl mx-auto text-center">
+            <div data-aos="zoom-in" className="max-w-5xl mx-auto text-center">
                 <h2 className="text-4xl font-bold text-gray-800 mb-12">Our Achievements</h2>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                     {/* User Count */}

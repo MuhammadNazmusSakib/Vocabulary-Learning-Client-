@@ -6,25 +6,8 @@ import { toast } from 'react-toastify';
 const Register = () => {
   const navigate = useNavigate();
   const location = useLocation()
-  const { setUser, createNewUser, updateUserProfile} = useContext(Contex)
+  const { setUser, createNewUser, updateUserProfile, googleSignIn } = useContext(Contex)
   const [error, setError] = useState({})
-  
-  // const [formData, setFormData] = useState({
-  //   name: '',
-  //   email: '',
-  //   photoURL: '',
-  //   password: '',
-  // });
-  // const [passwordError, setPasswordError] = useState('');
-
-  //                            Handle input changes
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData({
-  //     ...formData,
-  //     [name]: value,
-  //   });
-  // };
 
 
 
@@ -38,66 +21,59 @@ const Register = () => {
     const photo = form.get("photo")
     const password = form.get("password")
     if (password.length < 6) {
-      setError({...error, name: 'Password must be at least 6 characters long.'})
+      setError({ ...error, name: 'Password must be at least 6 characters long.' })
       return
     }
     if (!/[A-Z]/.test(password)) {
-      setError({...error, name: 'Password must have at least one uppercase letter.'})
-      return 
-    }
-    if (!/[a-z]/.test(password)) {
-      setError({...error, name: 'Password must have at least one lowercase letter.'}) 
+      setError({ ...error, name: 'Password must have at least one uppercase letter.' })
       return
     }
-  
+    if (!/[a-z]/.test(password)) {
+      setError({ ...error, name: 'Password must have at least one lowercase letter.' })
+      return
+    }
+
 
     createNewUser(email, password)
-    .then(result => {
-      const user = result.user
-      setUser(user)
+      .then(result => {
+        const user = result.user
+        setUser(user)
 
-      updateUserProfile({displayName: name, photoURL: photo})
-      .then(() => {
-        navigate("/")
-      }).catch((error) => {
-        console.log(error)
+        updateUserProfile({ displayName: name, photoURL: photo })
+          .then(() => {
+            const redirectPath = location.state?.from || "/"
+            navigate(redirectPath)
+          }).catch(() => {
+            toast("Failed!!")
+          })
       })
-
-      const redirectPath = location.state?.from || "/"
-      navigate(redirectPath)
-    })
-    .catch(() => {
-      toast("Registar Failed ! Please try again.", {
-        position: "top-center",
-        autoClose: 2000, // Close after 2 seconds
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
+      .catch(() => {
+        toast("Registar Failed ! Please try again.", {
+          position: "top-center",
+          autoClose: 2000, // Close after 2 seconds
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
-    });
-
-    // const error = validatePassword(formData.password);
-    // if (error) {
-    //   setPasswordError(error);
-    //   return;
-    // }
-
-    //                                   Simulate successful registration
-  //   if (formData.email && formData.password && formData.name) {
-  //     console.log('User registered with data:', formData);
-  //     toast.success('Registration successful!');
-  //     navigate('/');
-  //   } else {
-  //     toast.error('Registration failed. Please fill in all fields.');
-  //   }
   };
 
-  //                                    Handle Google Login (placeholder functionality)
-  // const handleGoogleLogin = () => {
-  //   toast.info('Google login not implemented yet.');
-  // };
+  //  Handle Google Login 
+  const handleGoogleLogin = () => {
+    googleSignIn()
+      .then((result) => {
+        const user = result.user
+        setUser(user)
+
+        const redirectPath = location.state?.from || "/"
+        navigate(redirectPath)
+      })
+      .catch(() => {
+        toast('Google login Failed. Please try again.');
+      })
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -114,8 +90,6 @@ const Register = () => {
               name="name"
               type="text"
               placeholder="Enter your name"
-              // value={formData.name}
-              // onChange={handleInputChange}
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
               required
             />
@@ -131,8 +105,6 @@ const Register = () => {
               name="email"
               type="email"
               placeholder="Enter your email"
-              // value={formData.email}
-              // onChange={handleInputChange}
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
               required
             />
@@ -148,8 +120,6 @@ const Register = () => {
               name="photo"
               type="url"
               placeholder="Enter a photo URL"
-              // value={formData.photoURL}
-              // onChange={handleInputChange}
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required
             />
           </div>
@@ -164,8 +134,6 @@ const Register = () => {
               name="password"
               type="password"
               placeholder="Enter your password"
-              // value={formData.password}
-              // onChange={handleInputChange}
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
               required
             />
@@ -187,7 +155,7 @@ const Register = () => {
         <div className="text-center mt-6">
           <button
             className="flex items-center justify-center w-full bg-lime-500 text-white py-2 px-4 rounded-md hover:bg-lime-600 transition duration-200"
-            // onClick={handleGoogleLogin}
+            onClick={handleGoogleLogin}
           >
             Sign up with Google
           </button>

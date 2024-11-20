@@ -20,15 +20,24 @@ import PrivateRoute from './Component/PrivateRoutes/PrivateRoute';
 import { ToastContainer } from 'react-toastify';
 import Dashboard from './Component/PrivateRoutes/PrivateRouteComponents/Dashboard';
 import MyProfile from './Component/PrivateRoutes/PrivateRouteComponents/MyProfile';
+import UpdateProfile from './Component/PrivateRoutes/PrivateRouteComponents/UpdateProfile';
+import ErrorPage from './Component/Routes/ErrorPage/ErrorPage';
+import ForgotPassword from './Component/Routes/SignIn&SignUp/ForgotPassword';
+import Hom from './Component/Home/Hom';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+    errorElement: <ErrorPage/>,
     children: [
       {
         path: "/",
         element: <Home />
+      },
+      {
+        path: "/hom",
+        element: <Hom/>
       },
       {
         path: "/login",
@@ -37,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <Register />
+      },
+      {
+        path: "/forgot-password",
+        element: <ForgotPassword/>
       },
       {
         path: "/lesson",
@@ -63,6 +76,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyProfile />
+          </PrivateRoute>
+        )
+      },
+      {
+        path: "/update-profile",
+        element: (
+          <PrivateRoute>
+            <UpdateProfile />
           </PrivateRoute>
         )
       },
