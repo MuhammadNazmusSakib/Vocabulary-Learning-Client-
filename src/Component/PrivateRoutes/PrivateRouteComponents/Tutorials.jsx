@@ -6,7 +6,7 @@ const Tutorial = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10 px-5">
+    <div className="min-h-screen bg-indigo-100 py-10 px-5">
       {/* Page Title */}
       {/* <Helmet>
         <title>Tutorial Page - Learn Programming Language</title>

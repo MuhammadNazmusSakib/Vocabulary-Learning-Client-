@@ -23,7 +23,7 @@ import MyProfile from './Component/PrivateRoutes/PrivateRouteComponents/MyProfil
 import UpdateProfile from './Component/PrivateRoutes/PrivateRouteComponents/UpdateProfile';
 import ErrorPage from './Component/Routes/ErrorPage/ErrorPage';
 import ForgotPassword from './Component/Routes/SignIn&SignUp/ForgotPassword';
-import VocabularyCard from './Component/Home/VocbularyCard';
+
 
 
 const router = createBrowserRouter([
@@ -35,10 +35,6 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />
-      },
-      {
-        path: "/vocabularyCard",
-        element: <VocabularyCard/>
       },
       {
         path: "/login",

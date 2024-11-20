@@ -37,10 +37,10 @@ const Header = () => {
 
                 {/* Navbar Center: Links for larger screens */}
                 <nav className="hidden lg:flex space-x-6">
-                    <Link to="/" className="text-gray-600 hover:text-blue-600">Home</Link>
-                    <Link to="/lesson" className="text-gray-600 hover:text-blue-600">Start Learning</Link>
-                    <Link to="/tutorials" className="text-gray-600 hover:text-blue-600">Tutorials</Link>
-                    <Link to="/about-us" className="text-gray-600 hover:text-blue-600">About Us</Link>
+                    <Link to="/" className="font-semi-bold hover:text-blue-600">Home</Link>
+                    <Link to="/lesson" className="font-semi-bold hover:text-blue-600">Start Learning</Link>
+                    <Link to="/tutorials" className="font-semi-bold hover:text-blue-600">Tutorials</Link>
+                    <Link to="/about-us" className="font-semi-bold hover:text-blue-600">About Us</Link>
                 </nav>
 
 
