@@ -9,7 +9,7 @@ Lingo Bingo is designed to make German language learning easy and engaging. It o
 ---
 
 ## **Live URL**
-Check out the live version of the project here: **[Lingo Bingo Live](https://your-live-url-here.com)**
+Check out the live version of the project here: **[Lingo Bingo Live](https://lingo-bingo-27ebf.web.app/)**
 
 ---
 
