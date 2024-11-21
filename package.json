@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@firebasegen/default-connector": "file:dataconnect-generated/js/default-connector",
     "aos": "^2.3.4",
     "firebase": "^11.0.2",
     "localforage": "^1.10.0",

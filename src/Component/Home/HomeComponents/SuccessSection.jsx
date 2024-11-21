@@ -29,7 +29,7 @@ const SuccessSection = () => {
                     </div>
                     {/* Vocabulary Count */}
                     <div className="flex flex-col items-center border border-slate-300 rounded-xl p-5 bg-white shadow-lg">
-                        <CountUp end={2000} duration={3} delay={0} suffix="+" className="text-5xl font-bold text-purple-600" />
+                        <CountUp end={1500} duration={3} delay={0} suffix="+" className="text-5xl font-bold text-purple-600" />
                         <p className="text-lg text-gray-700 mt-2">Vocabulary Words</p>
                     </div>
                     {/* Tutorial Count */}

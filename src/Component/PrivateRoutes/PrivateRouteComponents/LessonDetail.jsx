@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import logo from '../../../assets/image/main-logo.png'
-import { IoLogoTwitter } from 'react-icons/io';
+// import { IoLogoTwitter } from 'react-icons/io';
 import { RiUserVoiceFill } from 'react-icons/ri';
+import { toast } from 'react-toastify';
 
 const LessonDetail = () => {
   const { lesson_no } = useParams();
@@ -21,7 +22,7 @@ const LessonDetail = () => {
         const data = await response.json();
         setVocabularies(data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        toast.error('Error fetching data:', error);
       }
     };
 

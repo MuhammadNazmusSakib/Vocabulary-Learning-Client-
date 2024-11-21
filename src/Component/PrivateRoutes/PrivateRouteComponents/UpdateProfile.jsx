@@ -4,7 +4,7 @@ import { Contex } from '../../ContexApi/Contex';
 import { toast } from 'react-toastify';
 
 const UpdateProfile = () => {
-  const { user, updateUserProfile } = useContext(Contex); 
+  const { user, setUser, updateUserProfile } = useContext(Contex);
   const [name, setName] = useState(user?.name || '');
   const [photoURL, setPhotoURL] = useState(user?.photo || '');
   const navigate = useNavigate();
@@ -15,10 +15,15 @@ const UpdateProfile = () => {
     try {
       // Update profile in Firebase
       await updateUserProfile({ displayName: name, photoURL });
+      setUser((prevUser) => ({
+        ...prevUser,
+        displayName: name,
+        photoURL,
+      }))
       toast.success('Profile updated successfully!');
       navigate('/dashboard'); // Redirect to dashboard
     } catch (error) {
-      console.error('Error updating profile:', error);
+      toast.error('Error updating profile:', error);
       toast.error('Failed to update profile. Please try again.');
     }
   };

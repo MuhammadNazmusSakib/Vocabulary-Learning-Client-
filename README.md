@@ -29,7 +29,7 @@ Check out the live version of the project here: **[Lingo Bingo Live](https://you
   - View and update your profile information.
 
 - **Responsive Design**:
-  - Mobile-first design with seamless navigation across devices.
+  - Responsive design for all devices with seamless navigation. 
 
 - **Thematic Design**:
   - Winter-themed UI to make the learning experience enjoyable.
@@ -56,7 +56,6 @@ Check out the live version of the project here: **[Lingo Bingo Live](https://you
 - **react-router-dom**: For routing and navigation.
 - **firebase**: For authentication and backend integration.
 - **tailwindcss**: For styling and responsiveness.
-- **daisyui**: For pre-built UI components.
 - **react-toastify**: For toast notifications.
 - **react-countup**: For animated counters.
 
