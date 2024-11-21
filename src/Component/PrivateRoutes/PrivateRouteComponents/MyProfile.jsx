@@ -7,7 +7,7 @@ const MyProfile = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-lime-400">
+    <div className="min-h-screen bg-blue-200">
       {/* Cover Section */}
       <div className="px-3 h-48 bg-blue-500 flex items-center justify-center text-white">
         <h1 className="text-4xl font-bold">Welcome, {user?.displayName || 'User'}!</h1>
@@ -19,7 +19,7 @@ const MyProfile = () => {
           <div className="flex flex-col items-center">
             {/* Profile Photo */}
             <img
-              src={user?.photoURL || 'https://via.placeholder.com/150'}
+              src={user?.photoURL}
               alt="User"
               className="w-24 h-24 rounded-full border-4 border-blue-500 object-cover"
             />
@@ -43,3 +43,5 @@ const MyProfile = () => {
 };
 
 export default MyProfile;
+
+

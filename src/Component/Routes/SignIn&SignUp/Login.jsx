@@ -2,13 +2,18 @@ import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Contex } from "../../ContexApi/Contex";
 import { toast } from 'react-toastify'
+import { IoEyeOffSharp, IoEyeSharp } from "react-icons/io5";
+
 
 const Login = () => {
 
   const { userLogin, setUser, googleSignIn } = useContext(Contex)
   const [forgotPassword, setForgotPassword] = useState(false)
+  const [seePassword, setSeePassword] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
+
+
 
   //  Handle Google Login 
   const handleGoogleLogin = () => {
@@ -28,8 +33,11 @@ const Login = () => {
   // Forgot Password?.......
   const handleNavigateToForgotPassword = () => {
     setForgotPassword(true)
-    console.log(forgotPassword)
+    // console.log(forgotPassword)
   }
+
+  // see Password
+  const handleSeePassword = () => setSeePassword((prev) => (!prev))
 
 
   const handleSubmit = (e) => {
@@ -38,7 +46,7 @@ const Login = () => {
     const form = new FormData(e.target)
     const email = form.get("email")
     const password = form.get("password")
-    
+
     // Forgot Password...
     if (forgotPassword) {
       return navigate('/forgot-password', { state: { email } })
@@ -120,7 +128,7 @@ const Login = () => {
               placeholder="Enter your email"
             />
           </div>
-          <div className="mb-4">
+          <div className="mb-4 relative">
             <label
               htmlFor="password"
               className="block text-sm font-medium text-gray-700"
@@ -128,12 +136,17 @@ const Login = () => {
               Password
             </label>
             <input
-              type="password"
+              type={!seePassword? "password" : "text"}
               id="password"
               name="password"
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Enter your password"
             />
+            <buttton onClick={handleSeePassword} className="absolute mt-2 -ml-10 text-2xl">
+              {
+                !seePassword? <IoEyeOffSharp /> : <IoEyeSharp />
+              }
+            </buttton>
           </div>
           <div className="flex items-center justify-between mb-4">
             <label className="flex items-center">

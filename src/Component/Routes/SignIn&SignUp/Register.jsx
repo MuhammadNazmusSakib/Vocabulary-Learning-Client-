@@ -2,14 +2,17 @@ import React, { useContext, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Contex } from '../../ContexApi/Contex';
 import { toast } from 'react-toastify';
+import { IoEyeOffSharp, IoEyeSharp } from 'react-icons/io5';
 
 const Register = () => {
   const navigate = useNavigate();
   const location = useLocation()
   const { setUser, createNewUser, updateUserProfile, googleSignIn } = useContext(Contex)
   const [error, setError] = useState({})
+  const [seePassword, setSeePassword] = useState(false)
 
-
+  // see Password
+  const handleSeePassword = () => setSeePassword((prev) => (!prev))
 
   // Handle form submission
   const handleSubmit = (e) => {
@@ -132,11 +135,17 @@ const Register = () => {
             <input
               id="password"
               name="password"
-              type="password"
+              type={!seePassword ? "password" : "text"}
               placeholder="Enter your password"
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
               required
             />
+            <buttton onClick={handleSeePassword} className="absolute mt-2 -ml-10 text-2xl">
+              {
+                !seePassword ? <IoEyeOffSharp /> : <IoEyeSharp />
+              }
+            </buttton>
+
             {error.name && (
               <p className="text-red-500 text-sm mt-1">{error.name}</p>
             )}

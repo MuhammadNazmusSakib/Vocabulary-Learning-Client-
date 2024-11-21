@@ -1,16 +1,12 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-// import { Helmet } from 'react-helmet';
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+
 
 const Tutorial = () => {
   const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-indigo-100 py-10 px-5">
-      {/* Page Title */}
-      {/* <Helmet>
-        <title>Tutorial Page - Learn Programming Language</title>
-      </Helmet> */}
 
       {/* Header */}
       <h1 className="text-3xl font-bold text-center text-blue-600 mb-10">
