@@ -10,7 +10,7 @@ const Footer = () => {
                     <div>
                         <h2 className="text-xl font-bold mb-4">Contact Us</h2>
                         <p>Email: contact@lingo_bingo.com</p>
-                        <p>Phone: +123 456 7890</p>
+                        <p>Phone: +123 000 7890</p>
                         <p>Address: 123 Main St, Anytown, USA</p>
                     </div>
 
