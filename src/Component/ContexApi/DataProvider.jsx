@@ -10,7 +10,22 @@ const DataProvider = ({ children }) => {
 
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
-  //  console.log(user)
+  const [theme, setTheme] = useState('light')
+
+  // light/dark theme
+  const toggleTheme = () => {
+    setTheme(prev => !prev)
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+  }
+  // Set initial theme based on localStorage or default to light
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  }, []);
 
   const createNewUser = (email, password) => {
     // console.log("dfdy")
@@ -52,7 +67,7 @@ const DataProvider = ({ children }) => {
   }
 
   const contexApiData = {
-    user, setUser, createNewUser, logOut, userLogin, loading, updateUserProfile, googleSignIn, resetPassword
+    user, setUser, createNewUser, logOut, userLogin, loading, updateUserProfile, googleSignIn, resetPassword, toggleTheme, theme
   }
   return (
     <Contex.Provider value={contexApiData}>

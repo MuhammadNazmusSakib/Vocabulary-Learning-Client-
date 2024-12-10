@@ -1,22 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Contex } from '../ContexApi/Contex';
 
 const AboutUs = () => {
+  const {theme} = useContext(Contex)
   return (
-    <div className="min-h-screen bg-blue-100 py-10">
+    <div className={`min-h-screen py-10 ${theme === "dark" ? "" : "bg-blue-100"}`}>
       <div className="container mx-auto px-4">
         <h1 className="text-4xl font-bold text-center mb-8">About Us</h1>
 
         {/* About Yourself */}
-        <section className="bg-white shadow-md rounded-lg p-6 mb-6">
-          <h2 className="text-3xl font-semibold mb-4">About Me</h2>
+        <section className={`${theme === "dark" ? "bg-gray-300" : "bg-white"} shadow-md rounded-lg p-6 mb-6`}>
+          <h2 className="text-gray-800 text-3xl font-semibold mb-4">About Me</h2>
           <p className="text-gray-700 leading-relaxed">
             Hello! I'm a passionate developer with expertise in modern web development. I specialize in creating responsive and interactive web applications using the latest technologies like React, Tailwind CSS, Firebase, and more. I love building projects that are both functional and visually appealing.
           </p>
         </section>
 
         {/* Skills */}
-        <section className="bg-white shadow-md rounded-lg p-6 mb-6">
-          <h2 className="text-3xl font-semibold mb-4">Skills</h2>
+        <section className={`${theme === "dark" ? "bg-gray-300" : "bg-white"} shadow-md rounded-lg p-6 mb-6`}>
+          <h2 className="text-gray-800 text-3xl font-semibold mb-4">Skills</h2>
           <ul className="list-disc pl-6 text-gray-700 leading-relaxed">
             {/* React Skills */}
             <li>

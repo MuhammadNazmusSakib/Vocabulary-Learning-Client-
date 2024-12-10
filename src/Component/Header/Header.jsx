@@ -5,7 +5,7 @@ import { Contex } from '../ContexApi/Contex';
 
 const Header = () => {
 
-    const { user, logOut } = useContext(Contex)
+    const { user, logOut, toggleTheme } = useContext(Contex)
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -23,7 +23,7 @@ const Header = () => {
 
 
     return (
-        <header className="bg-white shadow-md">
+        <header className="shadow-md">
             {/* welcome message when logged in */}
             {user && (
                 <div className="bg-green-500 text-white text-center py-2">
@@ -36,7 +36,7 @@ const Header = () => {
             <div className="container mx-auto flex items-center justify-between py-4">
                 {/* Navbar Start: Logo */}
                 <div>
-                    <Link to="/" className="text-2xl font-bold text-gray-800">
+                    <Link to="/" className="text-2xl font-bold ">
                         <div className="flex items-center">
                             <img src={logo} className='w-10' />
                             <h1>Lingo Bingo</h1>
@@ -54,7 +54,7 @@ const Header = () => {
 
 
                 {/* Navbar End: Login Button */}
-                <div className="hidden lg:flex">
+                <div className="hidden lg:flex items-center gap-5">
                     {
                         user ? (
                             <>
@@ -132,6 +132,13 @@ const Header = () => {
                             </Link>
                         )
                     }
+                    {/* light/dark theme */}
+                    <div onClick={toggleTheme}>
+                        <input
+                            type="checkbox"
+                            value="synthwave"
+                            className="toggle theme-controller col-span-2 col-start-1 row-start-1 border-sky-400 bg-amber-300 [--tglbg:theme(colors.sky.500)] checked:border-blue-800 checked:bg-blue-300 checked:[--tglbg:theme(colors.blue.900)]" />
+                    </div>
 
                 </div>
 
@@ -158,35 +165,35 @@ const Header = () => {
 
             {/* Mobile Menu */}
             {isMenuOpen && (
-                <div className="lg:hidden mt-3 bg-white shadow-md rounded-md p-4">
+                <div className="lg:hidden mt-3 shadow-md rounded-md p-4">
                     <ul className="space-y-4">
                         <li>
-                            <Link to="/" className="block text-gray-600 hover:text-blue-600">Home</Link>
+                            <Link to="/" className="block  hover:text-blue-600">Home</Link>
                         </li>
                         <li>
-                            <Link to="/lesson" className="block text-gray-600 hover:text-blue-600">Start Learning</Link>
+                            <Link to="/lesson" className="block  hover:text-blue-600">Start Learning</Link>
                         </li>
                         <li>
-                            <Link to="/tutorials" className="block text-gray-600 hover:text-blue-600">Tutorials</Link>
+                            <Link to="/tutorials" className="block  hover:text-blue-600">Tutorials</Link>
                         </li>
                         <li>
-                            <Link to="/about-us" className="block text-gray-600 hover:text-blue-600">About Us</Link>
+                            <Link to="/about-us" className="block  hover:text-blue-600">About Us</Link>
                         </li>
                         {
                             user ? (
                                 <>
                                     <li>
-                                        <Link to="/my-profile" className="text-gray-600 hover:text-blue-600">
+                                        <Link to="/my-profile" className=" hover:text-blue-600">
                                             My Profile
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link to="/dashboard" className="text-gray-600 hover:text-blue-600">
+                                        <Link to="/dashboard" className=" hover:text-blue-600">
                                             Dashboard
                                         </Link>
                                     </li>
                                     <li>
-                                        <button onClick={logOut} className="block text-gray-600 hover:text-blue-600">
+                                        <button onClick={logOut} className="block  hover:text-blue-600">
                                             LogOut
                                         </button>
                                     </li>

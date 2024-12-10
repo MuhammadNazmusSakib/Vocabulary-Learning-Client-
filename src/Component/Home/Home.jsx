@@ -12,6 +12,7 @@ const Home = () => {
     <div>
       <BannerSlider />
       <About />
+      <div className='bg-gray-200 h-1'></div>
       <SuccessSection />
       <Testimonials />
       <FeaturedLessons />
