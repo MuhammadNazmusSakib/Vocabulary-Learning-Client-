@@ -7,7 +7,7 @@ import { IoEyeOffSharp, IoEyeSharp } from "react-icons/io5";
 
 const Login = () => {
 
-  const { userLogin, setUser, googleSignIn } = useContext(Contex)
+  const { userLogin, setUser, googleSignIn, theme } = useContext(Contex)
   const [forgotPassword, setForgotPassword] = useState(false)
   const [seePassword, setSeePassword] = useState(false)
   const location = useLocation()
@@ -81,7 +81,7 @@ const Login = () => {
 
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-green-200">
+    <div className={`${theme === 'dark' ? '' : 'bg-green-200'} flex justify-center items-center min-h-screen`}>
       <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
         {/* Title */}
         <h1 className="text-2xl font-bold text-center mb-6">
@@ -92,7 +92,7 @@ const Login = () => {
         <div className="w-full mb-4">
           <button
             onClick={handleGoogleLogin}
-            className="flex gap-4 w-full justify-center items-center bg-lime-500 text-white px-4 py-2 rounded-lg shadow hover:bg-lime-600 mr-2"
+            className="flex gap-4 w-full justify-center items-center bg-green-500 text-white px-4 py-2 rounded-lg shadow hover:bg-green-600 mr-2"
           >
             <img
               src="https://img.icons8.com/color/24/google-logo.png"
@@ -124,7 +124,7 @@ const Login = () => {
               type="email"
               id="email"
               name="email"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="bg-gray-200 w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Enter your email"
             />
           </div>
@@ -139,7 +139,7 @@ const Login = () => {
               type={!seePassword? "password" : "text"}
               id="password"
               name="password"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="bg-gray-200 w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Enter your password"
             />
             <buttton onClick={handleSeePassword} className="absolute mt-2 -ml-10 text-2xl">

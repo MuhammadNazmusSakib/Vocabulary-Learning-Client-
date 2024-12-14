@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { Contex } from '../../ContexApi/Contex';
 
 const MyProfile = () => {
-  const { user } = useContext(Contex); // User data from Context API
+  const { user, theme } = useContext(Contex); // User data from Context API
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-blue-200">
+    <div className={`${theme === 'dark' ? '' : 'bg-blue-200'} min-h-screen`}>
       {/* Cover Section */}
-      <div className="px-3 h-48 bg-blue-500 flex items-center justify-center text-white">
+      <div className={`${theme === 'dark' ? 'bg-blue-300' : 'bg-blue-500'} px-3 h-48 flex items-center justify-center text-white`}>
         <h1 className="text-4xl font-bold">Welcome, {user?.displayName || 'User'}!</h1>
       </div>
 
@@ -23,7 +23,7 @@ const MyProfile = () => {
               alt="User"
               className="w-24 h-24 rounded-full border-4 border-blue-500 object-cover"
             />
-            <h2 className="text-xl font-semibold mt-4">{user?.displayName || 'Not provided'}</h2>
+            <h2 className="text-gray-800 text-xl font-semibold mt-4">{user?.displayName || 'Not provided'}</h2>
             <p className="text-gray-600">{user?.email || 'Not provided'}</p>
           </div>
 

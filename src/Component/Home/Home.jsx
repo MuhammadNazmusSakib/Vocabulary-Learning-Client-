@@ -14,7 +14,9 @@ const Home = () => {
       <About />
       <div className='bg-gray-200 h-1'></div>
       <SuccessSection />
+      <div className='bg-gray-200 h-1'></div>
       <Testimonials />
+      <div className='bg-gray-200 h-1'></div>
       <FeaturedLessons />
       {/* <LessonsPage /> */}
     </div>

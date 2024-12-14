@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { Contex } from '../../ContexApi/Contex';
 
 const Testimonials = () => {
 
+    const {theme} = useContext(Contex)
+    
     useEffect(() => {
         AOS.init({
           duration: 1000, // Animation duration in milliseconds
@@ -12,7 +15,7 @@ const Testimonials = () => {
       }, []);
 
     return (
-        <section className="bg-blue-600 py-16 px-6">
+        <section className={`${theme === 'dark' ? '' : 'bg-blue-600'} py-16 px-6`}>
             <div data-aos="zoom-in" className="max-w-5xl mx-auto text-center">
                 <h2 className="text-4xl font-bold mb-8">What Our Users Say</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

@@ -68,7 +68,7 @@ const LessonDetail = () => {
       </div>
       {/* Vocabulary Cards */}
       {filteredVocabularies.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">
+        <div className="text-black grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">
           {filteredVocabularies.map((word) => (
             <div onClick={() => handlePronounce(word.word)}
               key={word.id}
@@ -102,7 +102,7 @@ const LessonDetail = () => {
       {/* Modal for "When to Say" */}
       {selectedWord && (
         <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-8 rounded-lg shadow-lg w-11/12 max-w-lg">
+          <div className="bg-white text-black p-8 rounded-lg shadow-lg w-11/12 max-w-lg">
             <h2 className="text-3xl font-bold mb-4">{selectedWord.word}</h2>
             <p className="italic"><strong>Pronunciation: </strong>{selectedWord.pronunciation}</p>
             <p>

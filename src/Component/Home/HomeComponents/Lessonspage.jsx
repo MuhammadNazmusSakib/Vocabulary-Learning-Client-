@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../../assets/image/main-logo.png'
+import { Contex } from '../../ContexApi/Contex';
 
 const LessonsPage = () => {
   const navigate = useNavigate();
+  const {theme} = useContext(Contex)
 
   // List of 10 lessons
   const lessons = Array.from({ length: 10 }, (_, index) => ({
@@ -17,7 +19,7 @@ const LessonsPage = () => {
   };
 
   return (
-    <section className='bg-indigo-100'>
+    <section className={`${theme === 'dark' ? '' : 'bg-indigo-100'}`}>
       <div className="container mx-auto py-10 px-4">
         {/* Page Title */}
         <div className="flex items-center text-4xl font-bold justify-center gap-3 mb-12">
@@ -30,7 +32,7 @@ const LessonsPage = () => {
           {lessons.map((lesson) => (
             <div
               key={lesson.lesson_no}
-              className="cursor-pointer bg-blue-50 hover:bg-blue-200 rounded-lg shadow-md p-6 flex items-center justify-center text-xl font-semibold"
+              className="cursor-pointer bg-blue-50 hover:bg-blue-200 rounded-lg shadow-md p-6 flex items-center justify-center text-gray-600 text-xl font-semibold"
               onClick={() => handleCardClick(lesson.lesson_no)}>
               {lesson.title}
             </div>

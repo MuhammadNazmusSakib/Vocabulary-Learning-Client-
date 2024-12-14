@@ -1,18 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Contex } from '../../ContexApi/Contex';
 
 
 const Tutorial = () => {
   const navigate = useNavigate();
+  const {theme} = useContext(Contex)
 
   return (
-    <div className="min-h-screen bg-indigo-100 py-10 px-5">
+    <div className={`${theme === 'dark' ? '' : 'bg-indigo-100'}min-h-screen py-10 px-5`}>
 
       {/* Header */}
       <h1 className="text-3xl font-bold text-center text-blue-600 mb-10">
         Welcome to the Tutorial Page!
       </h1>
-      <p className="text-center text-gray-700 mb-8">
+      <p className="text-center mb-8">
         Here are some tutorials to help you master this German language.
       </p>
 

@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { Contex } from '../../ContexApi/Contex'
 
 const FeaturedLessons = () => {
+    const {theme} = useContext(Contex)
     return (
-        <section className="bg-blue-100 py-16 px-6">
+        <section className={`${theme === 'dark' ? '' : 'bg-blue-100'} py-16 px-6`}>
             <div className="max-w-5xl mx-auto text-center">
                 <h2 className="text-4xl font-bold mb-8">Featured Lessons</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

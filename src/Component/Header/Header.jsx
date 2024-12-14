@@ -165,7 +165,14 @@ const Header = () => {
 
             {/* Mobile Menu */}
             {isMenuOpen && (
-                <div className="lg:hidden mt-3 shadow-md rounded-md p-4">
+                <div onClick={toggleMenu} className="lg:hidden mt-3 shadow-md rounded-md p-4">
+                    {/* light/dark theme */}
+                    <div onClick={toggleTheme}>
+                        <input
+                            type="checkbox"
+                            value="synthwave"
+                            className="toggle theme-controller col-span-2 col-start-1 row-start-1 border-sky-400 bg-amber-300 [--tglbg:theme(colors.sky.500)] checked:border-blue-800 checked:bg-blue-300 checked:[--tglbg:theme(colors.blue.900)]" />
+                    </div> 
                     <ul className="space-y-4">
                         <li>
                             <Link to="/" className="block  hover:text-blue-600">Home</Link>

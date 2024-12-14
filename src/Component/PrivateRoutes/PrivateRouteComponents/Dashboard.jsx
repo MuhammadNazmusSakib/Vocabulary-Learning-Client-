@@ -3,15 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import { Contex } from '../../ContexApi/Contex';
 
 const Dashboard = () => {
-  const { user } = useContext(Contex); 
+  const { user, theme } = useContext(Contex); 
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-blue-100 flex flex-col items-center py-10">
+    <div className={`${theme === 'dark' ? '' : 'bg-blue-100'} min-h-screen flex flex-col items-center py-10`}>
       {/* Welcome Title */}
       <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold text-gray-800">Welcome, {user?.displayName || 'User'}!</h1>
-        <p className="text-gray-600 text-lg mt-2">Here’s your profile information.</p>
+        <h1 className="text-4xl font-bold ">Welcome, {user?.displayName || 'User'}!</h1>
+        <p className=" text-lg mt-2">Here’s your profile information.</p>
       </div>
 
       {/* Profile Information Card */}
