@@ -6,33 +6,23 @@ import { RiUserVoiceFill } from 'react-icons/ri';
 import { toast } from 'react-toastify';
 
 const LessonDetail = () => {
-  const { lesson_no } = useParams();
+  const { difficulty } = useParams();
   const navigate = useNavigate();
   const [vocabularies, setVocabularies] = useState([]);
   const [selectedWord, setSelectedWord] = useState(null);
+  const [allChecked, setAllChecked] = useState(false)
 
-  // Fetch data from JSON file
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('/updated_german_words_data.json');
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
-        const data = await response.json();
-        setVocabularies(data);
-      } catch (error) {
-        toast.error('Error fetching data:', error);
-      }
-    };
+    fetch(`http://localhost:5000/allVocabulary/difficulty/${difficulty}`)
+      .then(res => res.json())
+      .then(data => setVocabularies(data))
+  }, [difficulty])
 
-    fetchData();
-  }, []);
-
-  // Filter vocabularies based on lesson_no
-  const filteredVocabularies = vocabularies.filter(
-    (item) => item.lesson_no === parseInt(lesson_no)
-  );
+  // Function to toggle checkbox state
+  const toggleCheckbox = () => {
+    setAllChecked(!allChecked);
+  }
 
   // Handle modal open/close
   const openModal = (word) => setSelectedWord(word);
@@ -63,22 +53,27 @@ const LessonDetail = () => {
     <div className="container mx-auto py-10 px-4">
       {/* Page Title */}
       <div className="flex items-center text-4xl font-bold justify-center gap-3 mb-12">
-        <h1>Lesson {lesson_no}</h1>
+        <h1>Lesson {difficulty}</h1>
         <img src={logo} className='w-14' />
       </div>
+      {/* mark as complete */}
+      <div className="flex items-center justify-end gap-3 mb-8">
+        <span className="text-xl font-bold">Mark as Complete</span>
+        <input type="checkbox" onChange={toggleCheckbox} className="checkbox checkbox-primary" />
+      </div>
       {/* Vocabulary Cards */}
-      {filteredVocabularies.length > 0 ? (
+      {vocabularies.length > 0 ? (
         <div className="text-black grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">
-          {filteredVocabularies.map((word) => (
-            <div onClick={() => handlePronounce(word.word)}
-              key={word.id}
+          {vocabularies.map((word) => (
+            <div
+              key={word._id}
               className={`cursor-pointer ${getDifficultyColor(
                 word.difficulty
               )} rounded-lg shadow-md p-6`}
             >
               <div className='flex items-center place-content-between'>
                 <h2 className="text-2xl font-bold">{word.word}</h2>
-                <RiUserVoiceFill className='text-red-500 text-2xl' />
+                <RiUserVoiceFill onClick={() => handlePronounce(word.word)} className='text-red-500 text-2xl' />
               </div>
               <p className="italic">Pronunciation: {word.pronunciation}</p>
               <p>Meaning: {word.meaning}</p>
@@ -92,6 +87,10 @@ const LessonDetail = () => {
               >
                 When to Say
               </button>
+              <div className="flex items-center justify-end gap-3 mt-4">
+                <span className="font-semibold">Mark as Complete</span>
+                <input type="checkbox" checked={allChecked} className="checkbox checkbox-primary" />
+              </div>
             </div>
           ))}
         </div>
@@ -111,8 +110,9 @@ const LessonDetail = () => {
             <p>
               <strong>When to say:</strong> {selectedWord.when_to_say}
             </p>
-            <p>
+            <p className='flex'>
               <strong>Example:</strong> {selectedWord.example}
+              <RiUserVoiceFill onClick={() => handlePronounce(selectedWord.example)} className='text-red-500 text-3xl' />
             </p>
             <button
               className="mt-6 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"

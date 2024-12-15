@@ -1,22 +1,12 @@
-import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext} from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../../assets/image/main-logo.png'
 import { Contex } from '../../ContexApi/Contex';
 
 const LessonsPage = () => {
   const navigate = useNavigate();
-  const {theme} = useContext(Contex)
+  const { theme } = useContext(Contex)
 
-  // List of 10 lessons
-  const lessons = Array.from({ length: 10 }, (_, index) => ({
-    lesson_no: index + 1,
-    title: `Lesson ${index + 1}`,
-  }));
-
-  // Handle card click to navigate to the lesson detail page
-  const handleCardClick = (lessonNo) => {
-    navigate(`/lesson/${lessonNo}`);
-  };
 
   return (
     <section className={`${theme === 'dark' ? '' : 'bg-indigo-100'}`}>
@@ -28,16 +18,75 @@ const LessonsPage = () => {
         </div>
 
         {/* Lessons Section */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-12">
-          {lessons.map((lesson) => (
-            <div
-              key={lesson.lesson_no}
-              className="cursor-pointer bg-blue-50 hover:bg-blue-200 rounded-lg shadow-md p-6 flex items-center justify-center text-gray-600 text-xl font-semibold"
-              onClick={() => handleCardClick(lesson.lesson_no)}>
-              {lesson.title}
+        <section className={`${theme === 'dark' ? 'text-black' : 'bg-blue-100'} py-16 px-6`}>
+          <div className="max-w-5xl mx-auto text-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Lesson 1 */}
+              <Link to={`/lesson/easy`}>
+                <div className="bg-white h-full shadow-lg rounded-lg overflow-hidden">
+                  <img
+                    src="https://i.ibb.co.com/t3pGkGs/a1a2.jpg"
+                    alt="Lesson 1"
+                    className="w-full h-fit object-cover"
+                  />
+                  <div className="p-6">
+                    <h3 className="text-2xl font-semibold">A1, A2 || Basic User</h3>
+                    <p className="text-gray-600 mt-4">
+                      Start with the basics and build a strong foundation in German vocabulary.
+                    </p>
+                  </div>
+                </div>
+              </Link>
+              {/* Lesson 2 */}
+              <Link to={`/lesson/medium`}>
+                <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+                  <img
+                    src="https://i.ibb.co.com/74Z4scG/B1B2.webp"
+                    alt="Lesson 2"
+                    className="w-full h-fit object-cover"
+                  />
+                  <div className="p-6">
+                    <h3 className="text-2xl font-semibold">B1, B2 || Independent User</h3>
+                    <p className="text-gray-600 mt-4">
+                      Learn useful phrases for everyday conversations in German.
+                    </p>
+                  </div>
+                </div>
+              </Link>
+              {/* Lesson 3 */}
+              <Link to={`/lesson/difficult`}>
+                <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+                  <img
+                    src="https://i.ibb.co.com/Nmjj84j/C1C2.jpg"
+                    alt="Lesson 3"
+                    className="w-full h-fit object-cover"
+                  />
+                  <div className="p-6">
+                    <h3 className="text-2xl font-semibold">C1, C2 || Proficient User</h3>
+                    <p className="text-gray-600 mt-4">
+                      Master complex grammar rules to become fluent in German.
+                    </p>
+                  </div>
+                </div>
+              </Link>
+              {/* Lesson 4 */}
+              <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+                <img
+                  src="https://i.ibb.co.com/SV9MQXq/TEACHER.jpg"
+                  alt="Lesson 3"
+                  className="w-full h-fit object-cover"
+                />
+                <div className="p-6">
+                  <h3 className="text-2xl font-semibold">For Teachers</h3>
+                  <p className="text-gray-600 mt-4">
+                    Master complex grammar rules to become fluent in German.
+                  </p>
+                </div>
+              </div>
             </div>
-          ))}
-        </div>
+          </div>
+        </section>
+
 
         {/* Tutorial Section */}
         <div className="mb-12">

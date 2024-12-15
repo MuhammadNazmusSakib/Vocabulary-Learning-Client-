@@ -53,7 +53,7 @@ const router = createBrowserRouter([
         element: <LessonsPage />
       },
       {
-        path: "/lesson/:lesson_no",
+        path: "/lesson/:difficulty",
         element: (
           <PrivateRoute>
             <LessonDetail />

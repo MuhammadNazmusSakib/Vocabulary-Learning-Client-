@@ -33,7 +33,7 @@ const Header = () => {
                 </div>
             )}
 
-            <div className="container mx-auto flex items-center justify-between py-4">
+            <div className="container mx-auto flex items-center justify-between px-4 py-4">
                 {/* Navbar Start: Logo */}
                 <div>
                     <Link to="/" className="text-2xl font-bold ">
