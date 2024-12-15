@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import logo from '../../../assets/image/main-logo.png'
-// import { IoLogoTwitter } from 'react-icons/io';
 import { RiUserVoiceFill } from 'react-icons/ri';
-import { toast } from 'react-toastify';
+
 
 const LessonDetail = () => {
   const { difficulty } = useParams();
@@ -11,6 +10,7 @@ const LessonDetail = () => {
   const [vocabularies, setVocabularies] = useState([]);
   const [selectedWord, setSelectedWord] = useState(null);
   const [allChecked, setAllChecked] = useState(false)
+  const [completedWords, setCompletedWords] = useState(new Set()); // Track completed words
 
 
   useEffect(() => {
@@ -19,10 +19,32 @@ const LessonDetail = () => {
       .then(data => setVocabularies(data))
   }, [difficulty])
 
-  // Function to toggle checkbox state
-  const toggleCheckbox = () => {
-    setAllChecked(!allChecked);
+  // Toggle individual word completion
+  const toggleWordCompletion = (id) => {
+    setCompletedWords((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(id)) {
+        newSet.delete(id);
+      } else {
+        newSet.add(id);
+      }
+      return newSet;
+    });
   }
+
+    // Mark all as complete/incomplete
+    const toggleAllCheckbox = () => {
+      setAllChecked((prev) => !prev);
+      if (!allChecked) {
+        // Mark all as complete
+        const allIds = vocabularies.map((word) => word._id);
+        setCompletedWords(new Set(allIds));
+      } else {
+        // Clear all completed states
+        setCompletedWords(new Set());
+      }
+    };
+    // console.log(completedWords)
 
   // Handle modal open/close
   const openModal = (word) => setSelectedWord(word);
@@ -59,7 +81,11 @@ const LessonDetail = () => {
       {/* mark as complete */}
       <div className="flex items-center justify-end gap-3 mb-8">
         <span className="text-xl font-bold">Mark as Complete</span>
-        <input type="checkbox" onChange={toggleCheckbox} className="checkbox checkbox-primary" />
+        <input
+          type="checkbox"
+          checked={allChecked}
+          onChange={toggleAllCheckbox}
+          className="checkbox checkbox-primary" />
       </div>
       {/* Vocabulary Cards */}
       {vocabularies.length > 0 ? (
@@ -89,7 +115,11 @@ const LessonDetail = () => {
               </button>
               <div className="flex items-center justify-end gap-3 mt-4">
                 <span className="font-semibold">Mark as Complete</span>
-                <input type="checkbox" checked={allChecked} className="checkbox checkbox-primary" />
+                <input
+                  type="checkbox"
+                  checked={completedWords.has(word._id)}
+                  onChange={() => toggleWordCompletion(word._id)}
+                  className="checkbox checkbox-primary" />
               </div>
             </div>
           ))}
