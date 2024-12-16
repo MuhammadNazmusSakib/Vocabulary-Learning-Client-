@@ -12,6 +12,7 @@
   "dependencies": {
     "@firebasegen/default-connector": "file:dataconnect-generated/js/default-connector",
     "aos": "^2.3.4",
+    "axios": "^1.7.9",
     "firebase": "^11.0.2",
     "localforage": "^1.10.0",
     "match-sorter": "^8.0.0",

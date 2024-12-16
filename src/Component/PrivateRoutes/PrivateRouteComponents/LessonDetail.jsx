@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import logo from '../../../assets/image/main-logo.png'
 import { RiUserVoiceFill } from 'react-icons/ri';
+import axios from 'axios'
+import { Contex } from '../../ContexApi/Contex';
 
 
 const LessonDetail = () => {
+  const {user} = useContext(Contex)
   const { difficulty } = useParams();
   const navigate = useNavigate();
   const [vocabularies, setVocabularies] = useState([]);
   const [selectedWord, setSelectedWord] = useState(null);
   const [allChecked, setAllChecked] = useState(false)
   const [completedWords, setCompletedWords] = useState(new Set()); // Track completed words
+  const previousCompletedWords = useRef(new Set())
+
 
 
   useEffect(() => {
@@ -19,7 +24,37 @@ const LessonDetail = () => {
       .then(data => setVocabularies(data))
   }, [difficulty])
 
-  // Toggle individual word completion
+  // Send only newly added words to the backend when completedWords is updated
+  useEffect(() => {
+    // Find newly added words by comparing with previous state
+    const newlyAddedWords = Array.from(completedWords).filter(wordId => !previousCompletedWords.current.has(wordId));
+
+    if (newlyAddedWords.length > 0) {
+      const sendCompletedWords = async () => {
+        try {
+          // Construct the payload for only newly added words
+          const completedWordsData = newlyAddedWords.map((wordId) => ({
+            wordId, // Word ID
+            difficulty, // Difficulty level
+            email: user?.email
+          }));
+
+          // Send newly added words to the backend
+          const response = await axios.post('http://localhost:5000/completedWords', completedWordsData);
+          console.log("Server Response:", response.data);
+
+          // Update the ref to the current state of completedWords
+          previousCompletedWords.current = new Set(completedWords);
+        } catch (error) {
+          console.error("Error sending completed words:", error);
+        }
+      };
+
+      sendCompletedWords();
+    }
+  }, [completedWords, difficulty]);
+
+  // Toggle individual word completion------------------------
   const toggleWordCompletion = (id) => {
     setCompletedWords((prev) => {
       const newSet = new Set(prev);
@@ -32,19 +67,20 @@ const LessonDetail = () => {
     });
   }
 
-    // Mark all as complete/incomplete
-    const toggleAllCheckbox = () => {
-      setAllChecked((prev) => !prev);
-      if (!allChecked) {
-        // Mark all as complete
-        const allIds = vocabularies.map((word) => word._id);
-        setCompletedWords(new Set(allIds));
-      } else {
-        // Clear all completed states
-        setCompletedWords(new Set());
-      }
-    };
-    // console.log(completedWords)
+  // Mark all as complete/incomplete---------------------------
+  const toggleAllCheckbox = () => {
+    setAllChecked((prev) => !prev);
+    if (!allChecked) {
+      // Mark all as complete
+      const allIds = vocabularies.map((word) => word._id);
+      setCompletedWords(new Set(allIds));
+    } else {
+      // Clear all completed states
+      setCompletedWords(new Set());
+    }
+  };
+  // console.log(completedWords)
+
 
   // Handle modal open/close
   const openModal = (word) => setSelectedWord(word);
