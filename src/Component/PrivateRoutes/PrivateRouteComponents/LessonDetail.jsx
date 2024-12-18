@@ -4,10 +4,10 @@ import logo from '../../../assets/image/main-logo.png'
 import { RiUserVoiceFill } from 'react-icons/ri';
 import axios from 'axios'
 import { Contex } from '../../ContexApi/Contex';
-
+import Swal from 'sweetalert2'
 
 const LessonDetail = () => {
-  const {user} = useContext(Contex)
+  const { user } = useContext(Contex)
   const { difficulty } = useParams();
   const navigate = useNavigate();
   const [vocabularies, setVocabularies] = useState([]);
@@ -45,6 +45,14 @@ const LessonDetail = () => {
 
           // Update the ref to the current state of completedWords
           previousCompletedWords.current = new Set(completedWords);
+
+          if (response.data.insertedCount > 0) {
+            Swal.fire({
+              title: "Completed!",
+              text: "Added to complete list!",
+              icon: "success"
+            });
+          }
         } catch (error) {
           console.error("Error sending completed words:", error);
         }
@@ -55,17 +63,36 @@ const LessonDetail = () => {
   }, [completedWords, difficulty]);
 
   // Toggle individual word completion------------------------
+
   const toggleWordCompletion = (id) => {
     setCompletedWords((prev) => {
       const newSet = new Set(prev);
       if (newSet.has(id)) {
         newSet.delete(id);
+        // Send DELETE request to the server
+        axios
+          .delete(`http://localhost:5000/completedWords/${id}`)
+          .then((res) => {
+            console.log(res.data)
+            if (res.data.deletedCount > 0) {
+              // Clear all completed states
+              previousCompletedWords.current = new Set(newSet)
+              Swal.fire({
+                icon: "error",
+                title: "Removed!",
+                text: "Removed from Completed List!",
+              });
+            }
+          })
       } else {
         newSet.add(id);
       }
       return newSet;
     });
   }
+
+
+
 
   // Mark all as complete/incomplete---------------------------
   const toggleAllCheckbox = () => {
@@ -75,8 +102,30 @@ const LessonDetail = () => {
       const allIds = vocabularies.map((word) => word._id);
       setCompletedWords(new Set(allIds));
     } else {
-      // Clear all completed states
       setCompletedWords(new Set());
+      // Send DELETE requests for all words
+      const allIds = vocabularies.map((word) => ({
+        wordId: word._id,
+        email: user?.email, // Ensure email is included for backend filtering
+      }))
+      // console.log(allIds)
+      axios
+        .post(`http://localhost:5000/completedWords/deleteAll`, allIds)
+        .then((res) => {
+          console.log(res.data)
+          if (res.data.deletedCount > 0) {
+            // ----------------------------working--------------------------------
+            // Clear all completed states
+            previousCompletedWords.current = new Set()
+            Swal.fire({
+              icon: "error",
+              title: "Removed!",
+              text: "Removed from Completed List!",
+            });
+          }
+        })
+        .catch((error) => console.error(`Error deleting word :`, error));
+
     }
   };
   // console.log(completedWords)
