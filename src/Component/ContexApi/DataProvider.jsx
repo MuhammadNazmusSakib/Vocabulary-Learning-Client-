@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Contex } from './Contex'
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { auth } from '../Firebase/firebase.config';
+import axios from 'axios';
 
 
 const DataProvider = ({ children }) => {
@@ -35,7 +36,25 @@ const DataProvider = ({ children }) => {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, currentUser => {
       setUser(currentUser)
-      setLoading(false)
+      // jwt
+      if(currentUser?.email) {
+        const user = {email: currentUser.email}
+        axios.post(`http://localhost:5000/jwt`, user, {withCredentials: true})
+        .then(res => {
+          console.log(res.data)
+          setLoading(false)
+        })
+      }
+      else {
+        axios.post(`http://localhost:5000/logout`, {}, {
+          withCredentials: true
+        })
+        .then(res => {
+          console.log('logout', res.data)
+          setLoading(false)
+        })
+      }
+
     })
     return () => {
       unSubscribe()

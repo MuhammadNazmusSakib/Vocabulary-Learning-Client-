@@ -5,6 +5,7 @@ import { RiUserVoiceFill } from 'react-icons/ri';
 import axios from 'axios'
 import { Contex } from '../../ContexApi/Contex';
 import Swal from 'sweetalert2'
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const LessonDetail = () => {
   const { user } = useContext(Contex)
@@ -15,14 +16,34 @@ const LessonDetail = () => {
   const [allChecked, setAllChecked] = useState(false)
   const [completedWords, setCompletedWords] = useState(new Set()); // Track completed words
   const previousCompletedWords = useRef(new Set())
+  const axiosSecure = useAxiosSecure()
 
 
 
   useEffect(() => {
-    fetch(`http://localhost:5000/allVocabulary/difficulty/${difficulty}`)
-      .then(res => res.json())
-      .then(data => setVocabularies(data))
+    // axios.get(`http://localhost:5000/allVocabulary/difficulty/${difficulty}`, {withCredentials: true})
+    // .then(res => setVocabularies(res.data))
+
+    axiosSecure.get(`allVocabulary/difficulty/${difficulty}`)
+    .then(res => setVocabularies(res.data))
   }, [difficulty])
+
+  // Fetch completed words from the server based on user
+  useEffect(() => {
+    const fetchCompletedWords = async () => {
+      try {
+        // const response = await axios.get(`http://localhost:5000/completedWords/email/${user?.email}`, {withCredentials: true});
+        const response = await axiosSecure.get(`completedWords/email/${user?.email}`)
+        const storedWords = response.data.map((word) => word.wordId);
+        setCompletedWords(new Set(storedWords));
+        previousCompletedWords.current = new Set(storedWords); // Sync the previous state
+      } catch (error) {
+        console.error('Error fetching completed words:', error);
+      }
+    };
+
+    fetchCompletedWords();
+  }, []);
 
   // Send only newly added words to the backend when completedWords is updated
   useEffect(() => {
@@ -40,7 +61,8 @@ const LessonDetail = () => {
           }));
 
           // Send newly added words to the backend
-          const response = await axios.post('http://localhost:5000/completedWords', completedWordsData);
+          // const response = await axios.post('http://localhost:5000/completedWords', completedWordsData);
+          const response = await axiosSecure.post('completedWords', completedWordsData)
           console.log("Server Response:", response.data);
 
           // Update the ref to the current state of completedWords
@@ -70,8 +92,9 @@ const LessonDetail = () => {
       if (newSet.has(id)) {
         newSet.delete(id);
         // Send DELETE request to the server
-        axios
-          .delete(`http://localhost:5000/completedWords/${id}`)
+        axiosSecure
+          // .delete(`http://localhost:5000/completedWords/${id}`)
+          .delete(`completedWords/${id}`)
           .then((res) => {
             console.log(res.data)
             if (res.data.deletedCount > 0) {
@@ -109,12 +132,13 @@ const LessonDetail = () => {
         email: user?.email, // Ensure email is included for backend filtering
       }))
       // console.log(allIds)
-      axios
-        .post(`http://localhost:5000/completedWords/deleteAll`, allIds)
+      axiosSecure
+        // .post(`http://localhost:5000/completedWords/deleteAll`, allIds)
+        .post(`completedWords/deleteAll`, allIds)
         .then((res) => {
           console.log(res.data)
           if (res.data.deletedCount > 0) {
-            // ----------------------------working--------------------------------
+            
             // Clear all completed states
             previousCompletedWords.current = new Set()
             Swal.fire({

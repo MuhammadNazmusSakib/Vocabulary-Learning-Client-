@@ -148,8 +148,8 @@ const Login = () => {
               }
             </buttton>
           </div>
-          <div className="flex items-center justify-between mb-4">
-            <label className="flex items-center">
+          <div className="flex justify-end mb-4">
+            {/* <label className="flex items-center">
               <input
                 type="checkbox"
                 className="text-green-500 mr-2"
@@ -157,7 +157,7 @@ const Login = () => {
               <span className="text-sm text-gray-700">
                 Remember me on this computer
               </span>
-            </label>
+            </label> */}
             <button onClick={handleNavigateToForgotPassword}
               className="text-sm text-green-500 hover:underline"
             >

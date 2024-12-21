@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Contex } from '../../ContexApi/Contex';
 
 const Dashboard = () => {
-  const { user, theme } = useContext(Contex); 
+  const { user, theme } = useContext(Contex);
   const navigate = useNavigate();
 
   return (
@@ -53,6 +53,12 @@ const Dashboard = () => {
             Update Profile
           </button>
         </div>
+      </div>
+      {/* progress */}
+      <div className='flex flex-col my-10'>
+        <progress className="progress progress-primary w-56" value="40" max="100"></progress>
+        <progress className="progress progress-primary w-56 mt-3" value="70" max="100"></progress>
+        <progress className="progress progress-primary w-56 mt-3" value="60" max="100"></progress>
       </div>
     </div>
   );
