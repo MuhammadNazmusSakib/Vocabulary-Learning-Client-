@@ -8,23 +8,25 @@ const MyProfile = () => {
 
   return (
     <div className={`${theme === 'dark' ? '' : 'bg-blue-200'} min-h-screen`}>
-      {/* Cover Section */}
-      <div className={`${theme === 'dark' ? 'bg-blue-300' : 'bg-blue-500'} px-3 h-48 flex items-center justify-center text-white`}>
-        <h1 className="text-4xl font-bold">Welcome, {user?.displayName || 'User'}!</h1>
-      </div>
 
       {/* Profile Information Card */}
-      <div className="flex justify-center mt-8">
-        <div className="bg-blue-100 shadow-lg rounded-lg p-6 w-96">
-          <div className="flex flex-col items-center">
+      <div className="flex justify-center py-8">
+        <div className="bg-blue-100 shadow-lg rounded-lg p-6">
+          <div className="flex flex-col">
             {/* Profile Photo */}
             <img
               src={user?.photoURL}
               alt="User"
-              className="w-24 h-24 rounded-full border-4 border-blue-500 object-cover"
+              className="w-32 h-32 rounded-lg sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-96 lg:h-56 object-cover"
             />
             <h2 className="text-gray-800 text-xl font-semibold mt-4">{user?.displayName || 'Not provided'}</h2>
             <p className="text-gray-600">{user?.email || 'Not provided'}</p>
+            <p className="text-gray-700 text-lg mt-2">
+              <strong>Created Time:</strong> {user?.metadata.creationTime || 'Not provided'}
+            </p>
+            <p className="text-gray-700 text-lg mt-2">
+              <strong>Last SignIn Time:</strong> {user?.metadata.lastSignInTime || 'Not provided'}
+            </p>
           </div>
 
           {/* Update Button */}

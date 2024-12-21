@@ -23,6 +23,7 @@ import MyProfile from './Component/PrivateRoutes/PrivateRouteComponents/MyProfil
 import UpdateProfile from './Component/PrivateRoutes/PrivateRouteComponents/UpdateProfile';
 import ErrorPage from './Component/Routes/ErrorPage/ErrorPage';
 import ForgotPassword from './Component/Routes/SignIn&SignUp/ForgotPassword';
+import Profile from './Component/PrivateRoutes/PrivateRouteComponents/Profile/Profile';
 
 
 
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
-    errorElement: <ErrorPage/>,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -46,7 +47,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/forgot-password",
-        element: <ForgotPassword/>
+        element: <ForgotPassword />
       },
       {
         path: "/lesson",
@@ -60,30 +61,48 @@ const router = createBrowserRouter([
           </PrivateRoute>
         )
       },
+      // {
+      //   path: "/dashboard",
+      //   element: (
+      //     <PrivateRoute>
+      //       <Dashboard />
+      //     </PrivateRoute>
+      //   )
+      // },
       {
-        path: "/dashboard",
-        element: (
-          <PrivateRoute>
-            <Dashboard />
-          </PrivateRoute>
-        )
+        path: 'my-profile',
+        element: (<PrivateRoute><Profile /></PrivateRoute>),
+        children: [
+          {
+            path: "",
+            element: <MyProfile />
+          },
+          {
+            path: "update-profile",
+            element: <UpdateProfile />
+          },
+          {
+            path: "dashboard",
+            element: <Dashboard />
+          },
+        ]
       },
-      {
-        path: "/my-profile",
-        element: (
-          <PrivateRoute>
-            <MyProfile />
-          </PrivateRoute>
-        )
-      },
-      {
-        path: "/update-profile",
-        element: (
-          <PrivateRoute>
-            <UpdateProfile />
-          </PrivateRoute>
-        )
-      },
+      // {
+      //   path: "/my-profile",
+      //   element: (
+      //     <PrivateRoute>
+      //       <MyProfile />
+      //     </PrivateRoute>
+      //   )
+      // },
+      // {
+      //   path: "/update-profile",
+      //   element: (
+      //     <PrivateRoute>
+      //       <UpdateProfile />
+      //     </PrivateRoute>
+      //   )
+      // },
       {
         path: "/tutorials",
         element: (
