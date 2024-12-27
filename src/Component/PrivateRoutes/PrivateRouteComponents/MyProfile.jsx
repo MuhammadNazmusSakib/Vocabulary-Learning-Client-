@@ -32,7 +32,7 @@ const MyProfile = () => {
           {/* Update Button */}
           <div className="mt-6">
             <button
-              onClick={() => navigate('/update-profile')}
+              onClick={() => navigate('update-profile')}
               className="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600 transition duration-200"
             >
               Update Information

@@ -24,6 +24,7 @@ import UpdateProfile from './Component/PrivateRoutes/PrivateRouteComponents/Upda
 import ErrorPage from './Component/Routes/ErrorPage/ErrorPage';
 import ForgotPassword from './Component/Routes/SignIn&SignUp/ForgotPassword';
 import Profile from './Component/PrivateRoutes/PrivateRouteComponents/Profile/Profile';
+import Achievements from './Component/PrivateRoutes/PrivateRouteComponents/a';
 
 
 
@@ -61,14 +62,6 @@ const router = createBrowserRouter([
           </PrivateRoute>
         )
       },
-      // {
-      //   path: "/dashboard",
-      //   element: (
-      //     <PrivateRoute>
-      //       <Dashboard />
-      //     </PrivateRoute>
-      //   )
-      // },
       {
         path: 'my-profile',
         element: (<PrivateRoute><Profile /></PrivateRoute>),
@@ -87,22 +80,6 @@ const router = createBrowserRouter([
           },
         ]
       },
-      // {
-      //   path: "/my-profile",
-      //   element: (
-      //     <PrivateRoute>
-      //       <MyProfile />
-      //     </PrivateRoute>
-      //   )
-      // },
-      // {
-      //   path: "/update-profile",
-      //   element: (
-      //     <PrivateRoute>
-      //       <UpdateProfile />
-      //     </PrivateRoute>
-      //   )
-      // },
       {
         path: "/tutorials",
         element: (
