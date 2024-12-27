@@ -21,7 +21,7 @@ const UpdateProfile = () => {
         photoURL,
       }))
       toast.success('Profile updated successfully!');
-      navigate('/dashboard'); // Redirect to dashboard
+      navigate('/my-profile'); // Redirect to my profile
     } catch (error) {
       toast.error('Error updating profile:', error);
       toast.error('Failed to update profile. Please try again.');

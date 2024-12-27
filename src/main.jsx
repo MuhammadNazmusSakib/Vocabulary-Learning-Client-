@@ -24,7 +24,7 @@ import UpdateProfile from './Component/PrivateRoutes/PrivateRouteComponents/Upda
 import ErrorPage from './Component/Routes/ErrorPage/ErrorPage';
 import ForgotPassword from './Component/Routes/SignIn&SignUp/ForgotPassword';
 import Profile from './Component/PrivateRoutes/PrivateRouteComponents/Profile/Profile';
-import Achievements from './Component/PrivateRoutes/PrivateRouteComponents/a';
+
 
 
 

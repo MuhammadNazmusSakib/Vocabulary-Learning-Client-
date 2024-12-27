@@ -90,7 +90,7 @@ const Dashboard = () => {
           <img
             src={user?.photoURL}
             alt="Profile"
-            className="w-32 h-32 rounded-lg sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-96 lg:h-56 object-cover"
+            className="w-full h-fit rounded-lg sm:w-96 sm:h-56 object-cover"
           />
         </div>
 

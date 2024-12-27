@@ -140,12 +140,12 @@ const Header = () => {
                             user ? (
                                 <>
                                     <li>
-                                        <Link to="/my-profile" className=" hover:text-blue-600">
+                                        <Link to="my-profile" className=" hover:text-blue-600">
                                             My Profile
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link to="/dashboard" className=" hover:text-blue-600">
+                                        <Link to="my-profile/dashboard" className=" hover:text-blue-600">
                                             Dashboard
                                         </Link>
                                     </li>
