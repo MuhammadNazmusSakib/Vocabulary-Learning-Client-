@@ -10,7 +10,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import Root from './Component/Root/Root';
 import Home from './Component/Home/Home';
 import Tutorials from './Component/PrivateRoutes/PrivateRouteComponents/Tutorials';
-import AboutUs from './Component/Routes/AboutUs';
 import LessonDetail from './Component/PrivateRoutes/PrivateRouteComponents/LessonDetail';
 import LessonsPage from './Component/Home/HomeComponents/Lessonspage';
 import Login from './Component/Routes/SignIn&SignUp/Login';
@@ -87,10 +86,6 @@ const router = createBrowserRouter([
             <Tutorials />
           </PrivateRoute>
         )
-      },
-      {
-        path: "/about-us",
-        element: <AboutUs />
       },
     ],
   },

@@ -16,9 +16,6 @@ const Header = () => {
 
     const [isOpen, setIsOpen] = useState(false);
 
-    // const toggleDropdown = () => {
-    //     setIsOpen(!isOpen);
-    // };
 
 
 
@@ -50,7 +47,6 @@ const Header = () => {
                         <Link to="/" className="font-semi-bold hover:text-blue-600">Home</Link>
                         <Link to="/lesson" className="font-semi-bold hover:text-blue-600">Start Learning</Link>
                         <Link to="/tutorials" className="font-semi-bold hover:text-blue-600">Tutorials</Link>
-                        <Link to="/about-us" className="font-semi-bold hover:text-blue-600">About Us</Link>
                     </nav>
 
 
@@ -133,9 +129,7 @@ const Header = () => {
                         <li>
                             <Link to="/tutorials" className="block  hover:text-blue-600">Tutorials</Link>
                         </li>
-                        <li>
-                            <Link to="/about-us" className="block  hover:text-blue-600">About Us</Link>
-                        </li>
+                       
                         {
                             user ? (
                                 <>
