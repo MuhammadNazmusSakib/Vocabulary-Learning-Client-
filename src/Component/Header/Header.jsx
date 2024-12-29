@@ -23,13 +23,13 @@ const Header = () => {
         <header >
             <div className="shadow-md">
                 {/* welcome message when logged in */}
-                {user && (
+                {/* {user && (
                     <div className="bg-green-500 text-white text-center py-2">
                         <p className="text-sm font-medium">
                             Welcome, <span className="font-bold">{user.displayName || 'User'}!</span>
                         </p>
                     </div>
-                )}
+                )} */}
 
                 <div className="container mx-auto flex items-center justify-between px-4 py-4">
                     {/* Navbar Start: Logo */}
