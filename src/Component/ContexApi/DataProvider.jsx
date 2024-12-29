@@ -57,8 +57,14 @@ const DataProvider = ({ children }) => {
         await setJWTToken(currentUser.email); // Set JWT token
         setLoading(false); // Set loading to false after JWT is set
       } else {
-        setUser(null);
-        setLoading(false);
+        axios.post(`https://vocabulary-learning-server-taupe.vercel.app/logout`, {}, {
+          withCredentials: true
+        })
+          .then(() => {
+            setUser(null);
+            setLoading(false);
+          })
+
       }
     });
 
