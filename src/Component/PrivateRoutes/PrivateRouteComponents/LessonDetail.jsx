@@ -21,7 +21,7 @@ const LessonDetail = () => {
 
 
   useEffect(() => {
-    // axios.get(`http://localhost:5000/allVocabulary/difficulty/${difficulty}`, {withCredentials: true})
+    // axios.get(`https://vocabulary-learning-server-taupe.vercel.app/allVocabulary/difficulty/${difficulty}`, {withCredentials: true})
     // .then(res => setVocabularies(res.data))
 
     axiosSecure.get(`allVocabulary/difficulty/${difficulty}`)
@@ -32,7 +32,7 @@ const LessonDetail = () => {
   useEffect(() => {
     const fetchCompletedWords = async () => {
       try {
-        // const response = await axios.get(`http://localhost:5000/completedWords/email/${user?.email}`, {withCredentials: true});
+        // const response = await axios.get(`https://vocabulary-learning-server-taupe.vercel.app/completedWords/email/${user?.email}`, {withCredentials: true});
         const response = await axiosSecure.get(`completedWords/email/${user?.email}`)
         const storedWords = response.data.map((word) => word.wordId);
         setCompletedWords(new Set(storedWords));
@@ -61,9 +61,9 @@ const LessonDetail = () => {
           }));
 
           // Send newly added words to the backend
-          // const response = await axios.post('http://localhost:5000/completedWords', completedWordsData);
+          // const response = await axios.post('https://vocabulary-learning-server-taupe.vercel.app/completedWords', completedWordsData);
           const response = await axiosSecure.post('completedWords', completedWordsData)
-          console.log("Server Response:", response.data);
+          // console.log("Server Response:", response.data);
 
           // Update the ref to the current state of completedWords
           previousCompletedWords.current = new Set(completedWords);
@@ -93,10 +93,10 @@ const LessonDetail = () => {
         newSet.delete(id);
         // Send DELETE request to the server
         axiosSecure
-          // .delete(`http://localhost:5000/completedWords/${id}`)
+          // .delete(`https://vocabulary-learning-server-taupe.vercel.app/completedWords/${id}`)
           .delete(`completedWords/${id}`)
           .then((res) => {
-            console.log(res.data)
+            // console.log(res.data)
             if (res.data.deletedCount > 0) {
               // Clear all completed states
               previousCompletedWords.current = new Set(newSet)
@@ -133,10 +133,10 @@ const LessonDetail = () => {
       }))
       // console.log(allIds)
       axiosSecure
-        // .post(`http://localhost:5000/completedWords/deleteAll`, allIds)
+        // .post(`https://vocabulary-learning-server-taupe.vercel.app/completedWords/deleteAll`, allIds)
         .post(`completedWords/deleteAll`, allIds)
         .then((res) => {
-          console.log(res.data)
+          // console.log(res.data)
           if (res.data.deletedCount > 0) {
             
             // Clear all completed states
