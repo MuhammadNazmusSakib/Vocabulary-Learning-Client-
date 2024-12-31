@@ -17,6 +17,7 @@ const LessonDetail = () => {
   const [completedWords, setCompletedWords] = useState(new Set()); // Track completed words
   const previousCompletedWords = useRef(new Set())
   const axiosSecure = useAxiosSecure()
+  const [loading, setLoading] = useState(true)
 
 
 
@@ -26,6 +27,9 @@ const LessonDetail = () => {
 
     axiosSecure.get(`allVocabulary/difficulty/${difficulty}`)
     .then(res => setVocabularies(res.data))
+    . finally(() => {
+      setLoading(false)
+    })
   }, [difficulty])
 
   // Fetch completed words from the server based on user
@@ -178,6 +182,14 @@ const LessonDetail = () => {
     const utterance = new SpeechSynthesisUtterance(word)
     utterance.lang = "de-DE"; // Set language to German
     speechSynthesis.speak(utterance)
+  }
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent border-solid rounded-full animate-spin"></div>
+      </div>
+    )
   }
 
   return (

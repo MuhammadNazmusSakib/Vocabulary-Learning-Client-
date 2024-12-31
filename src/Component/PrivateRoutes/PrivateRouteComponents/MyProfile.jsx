@@ -11,7 +11,7 @@ const MyProfile = () => {
     <div className={`${theme === 'dark' ? '' : ''} min-h-screen`}>
 
       {/* Profile Information Card */}
-      <div className="p-6 border-b-2">
+      <div className="p-6 ">
         {/* Profile Image */}
         <div className="relative flex flex-col">
           <img

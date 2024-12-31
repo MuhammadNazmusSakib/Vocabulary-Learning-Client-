@@ -11,6 +11,9 @@ const Dashboard = () => {
   const [completedEasy, setCompletedEasy] = useState([])
   const [completedMedium, setCompletedMedium] = useState([])
   const [completedDifficult, setCompletedDifficult] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [loadingAll, setLoadingAll] = useState(true)
+
 
 
   useEffect(() => {
@@ -19,6 +22,9 @@ const Dashboard = () => {
         setCountEasy(res.data.filter(item => item.difficulty === 'easy').length)
         setCountMedium(res.data.filter(item => item.difficulty === 'medium').length)
         setCountDifficult(res.data.filter(item => item.difficulty === 'difficult').length)
+      })
+      .finally(() =>  {
+        setLoadingAll(false)
       })
   }, [])
 
@@ -29,11 +35,22 @@ const Dashboard = () => {
         setCompletedMedium(res.data.filter(item => item.difficulty === 'medium').length)
         setCompletedDifficult(res.data.filter(item => item.difficulty === 'difficult').length)
       })
+      .finally(() =>  {
+      setLoading(false)
+    })
     // console.log('easy: ', completedEasy)
     // console.log('medium: ', completedMedium)
     // console.log('difficult', completedDifficult)
 
   }, [completedEasy, completedMedium, completedDifficult])
+
+  if (loading || loadingAll) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent border-solid rounded-full animate-spin"></div>
+      </div>
+    )
+  }
 
   const achievements = [
     {
@@ -131,7 +148,7 @@ const Dashboard = () => {
                   {achievement.progress}/{achievement.goal}
                 </div>
               </div>
-              
+
               <ProgressBar progress={achievement.progress} goal={achievement.goal} />
               <p className="text-sm text-gray-500 mt-1">
                 {achievement.description}
