@@ -18,6 +18,8 @@ const LessonDetail = () => {
   const previousCompletedWords = useRef(new Set())
   const axiosSecure = useAxiosSecure()
   const [loading, setLoading] = useState(true)
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 9; // Number of items per page
 
 
 
@@ -26,10 +28,10 @@ const LessonDetail = () => {
     // .then(res => setVocabularies(res.data))
 
     axiosSecure.get(`allVocabulary/difficulty/${difficulty}`)
-    .then(res => setVocabularies(res.data))
-    . finally(() => {
-      setLoading(false)
-    })
+      .then(res => setVocabularies(res.data))
+      .finally(() => {
+        setLoading(false)
+      })
   }, [difficulty])
 
   // Fetch completed words from the server based on user
@@ -142,7 +144,7 @@ const LessonDetail = () => {
         .then((res) => {
           // console.log(res.data)
           if (res.data.deletedCount > 0) {
-            
+
             // Clear all completed states
             previousCompletedWords.current = new Set()
             Swal.fire({
@@ -184,6 +186,20 @@ const LessonDetail = () => {
     speechSynthesis.speak(utterance)
   }
 
+  // pagination
+  const totalPages = Math.ceil(vocabularies.length / itemsPerPage);
+
+  const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
+
+  const paginatedData = vocabularies.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -209,9 +225,9 @@ const LessonDetail = () => {
           className="checkbox checkbox-primary" />
       </div>
       {/* Vocabulary Cards */}
-      {vocabularies.length > 0 ? (
+      {paginatedData.length > 0 ? (
         <div className="text-black grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">
-          {vocabularies.map((word) => (
+          {paginatedData.map((word) => (
             <div
               key={word._id}
               className={`cursor-pointer ${getDifficultyColor(
@@ -248,6 +264,27 @@ const LessonDetail = () => {
       ) : (
         <p className="text-center text-gray-500">No data available for this lesson.</p>
       )}
+
+      {/* Pagination Controls */}
+      <div className="flex justify-center items-center gap-4 mt-4">
+        <button
+          className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <span className="text-lg font-semibold">
+          Page {currentPage} of {totalPages}
+        </span>
+        <button
+          className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
+      </div>
 
       {/* Modal for "When to Say" */}
       {selectedWord && (
