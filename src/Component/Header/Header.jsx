@@ -20,8 +20,8 @@ const Header = () => {
 
 
     return (
-        <header className='bg-blue-100 sticky top-0 z-50'>
-            <div className="">
+        <header className='bg-gradient-to-tr from-blue-600 to-purple-500 sticky top-0 z-50'>
+            <div className="max-w-7xl mx-auto text-white">
                 {/* welcome message when logged in */}
                 {/* {user && (
                     <div className="bg-green-500 text-white text-center py-2">
@@ -44,9 +44,9 @@ const Header = () => {
 
                     {/* Navbar Center: Links for larger screens */}
                     <nav className="hidden lg:flex space-x-6">
-                        <Link to="/" className="font-semi-bold hover:text-blue-600">Home</Link>
-                        <Link to="/lesson" className="font-semi-bold hover:text-blue-600">Start Learning</Link>
-                        <Link to="/tutorials" className="font-semi-bold hover:text-blue-600">Tutorials</Link>
+                        <Link to="/" className="font-semi-bold hover:text-blue-950">Home</Link>
+                        <Link to="/lesson" className="font-semi-bold hover:text-blue-950">Start Learning</Link>
+                        <Link to="/tutorials" className="font-semi-bold hover:text-blue-950">Tutorials</Link>
                     </nav>
 
 
@@ -72,18 +72,18 @@ const Header = () => {
                                     </button>
                                 </>
                             ) : (
-                                <Link to="/login" className="btn bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+                                <Link to="/login" className="bg-blue-500 border border-white text-white py-1 px-4 rounded hover:bg-blue-600">
                                     Login
                                 </Link>
                             )
                         }
                         {/* light/dark theme */}
-                        <div onClick={toggleTheme}>
+                        {/* <div onClick={toggleTheme}>
                             <input
                                 type="checkbox"
                                 value="synthwave"
                                 className="toggle theme-controller col-span-2 col-start-1 row-start-1 border-sky-400 bg-amber-300 [--tglbg:theme(colors.sky.500)] checked:border-blue-800 checked:bg-blue-300 checked:[--tglbg:theme(colors.blue.900)]" />
-                        </div>
+                        </div> */}
 
                     </div>
 

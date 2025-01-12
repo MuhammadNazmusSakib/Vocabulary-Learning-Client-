@@ -13,10 +13,10 @@ const About = () => {
     })
   }, [])
   return (
-    <section className={`${theme === "dark" ? "" : "bg-gray-100 text-gray-700"} py-16 px-6 md:px-12 lg:px-24`}>
-      <div className="max-w-4xl mx-auto text-center">
+    <section className="bg-purple-100 py-16 ">
+      <div className="max-w-7xl mx-auto px-6 md:px-6 lg:px-8 text-left text-gray-700">
         <div data-aos="fade-up">
-          <h2 className="text-4xl font-bold mb-8">About Us</h2>
+          <h2 className="text-4xl text-gray-800 text-center font-bold mb-8">About Us</h2>
           <p className="text-lg  mb-6">
             Welcome to <span className="font-semibold text-blue-600">Lingo Bingo</span>, your go-to platform for mastering vocabulary in multiple languages! Our mission is to make language learning enjoyable, interactive, and accessible for everyone. Whether you’re a beginner or an advanced learner, we provide you with the tools and resources needed to expand your language skills efficiently.
           </p>

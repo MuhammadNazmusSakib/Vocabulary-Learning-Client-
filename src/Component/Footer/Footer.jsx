@@ -3,8 +3,8 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/f
 
 const Footer = () => {
     return (
-        <footer className="bg-gray-900 text-gray-200 py-10">
-            <div className="container mx-auto px-4">
+        <footer className="bg-gradient-to-br from-blue-900 to-purple-800 text-gray-200 py-10">
+            <div className="max-w-7xl mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {/* Contact Information */}
                     <div>
@@ -22,7 +22,7 @@ const Footer = () => {
                                 href="https://facebook.com"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-gray-400 hover:text-blue-600"
+                                className="text-gray-200 hover:text-blue-600"
                             >
                                 <FaFacebookF className="h-6 w-6" />
                             </a>
@@ -30,7 +30,7 @@ const Footer = () => {
                                 href="https://twitter.com"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-gray-400 hover:text-blue-400"
+                                className="text-gray-200 hover:text-blue-600"
                             >
                                 <FaTwitter className="h-6 w-6" />
                             </a>
@@ -38,7 +38,7 @@ const Footer = () => {
                                 href="https://instagram.com"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-gray-400 hover:text-pink-500"
+                                className="text-gray-200 hover:text-blue-600"
                             >
                                 <FaInstagram className="h-6 w-6" />
                             </a>
@@ -46,7 +46,7 @@ const Footer = () => {
                                 href="https://linkedin.com"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-gray-400 hover:text-blue-700"
+                                className="text-gray-200 hover:text-blue-600"
                             >
                                 <FaLinkedinIn className="h-6 w-6" />
                             </a>

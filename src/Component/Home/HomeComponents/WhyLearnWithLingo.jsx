@@ -2,7 +2,8 @@ import React from "react";
 
 const WhyLearnWithLingo = () => {
   return (
-    <div className="flex flex-col lg:flex-row items-center justify-between p-8 gap-8 bg-white">
+    <div className="p-8 gap-8 bg-purple-100">
+    <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-7">
       {/* Left Section - Image */}
       <div className="lg:w-1/2 flex justify-center">
         <img
@@ -13,7 +14,7 @@ const WhyLearnWithLingo = () => {
       </div>
 
       {/* Right Section - Text Content */}
-      <div className="lg:w-1/2 text-center lg:text-left">
+      <div className="lg:w-1/2 text-center lg:text-left text-gray-800">
         <h2 className="text-3xl lg:text-4xl font-bold mb-4">
           Why learn a language with Busuu?
         </h2>
@@ -32,6 +33,7 @@ const WhyLearnWithLingo = () => {
           Start Learning
         </button> */}
       </div>
+    </div>
     </div>
   );
 };
