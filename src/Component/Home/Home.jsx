@@ -6,19 +6,21 @@ import Testimonials from './HomeComponents/Testimonials'
 import FeaturedLessons from './HomeComponents/FeaturedLessons'
 import LessonsPage from './HomeComponents/Lessonspage'
 import { Link } from 'react-router-dom'
+import Banner from './HomeComponents/Banner'
+import WhyLearnWithLingo from './HomeComponents/WhyLearnWithLingo'
+import HeroSection from './HomeComponents/HeroSection'
 
 const Home = () => {
   return (
     <div>
-      <BannerSlider />
-      <About />
-      <div className='bg-gray-200 h-1'></div>
-      <SuccessSection />
-      <div className='bg-gray-200 h-1'></div>
+      {/* <BannerSlider /> */}
+      <Banner/>
+      <HeroSection/>
+      <WhyLearnWithLingo/>
+      {/* <About /> */}
+      {/* <SuccessSection /> */}
       <Testimonials />
-      <div className='bg-gray-200 h-1'></div>
       <FeaturedLessons />
-      {/* <LessonsPage /> */}
     </div>
   )
 }

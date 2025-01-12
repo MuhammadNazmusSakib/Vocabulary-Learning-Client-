@@ -34,7 +34,7 @@ const DataProvider = ({ children }) => {
   }
 
 
-  // set jwt and user state 
+  // set jwt  
   const setJWTToken = async (email) => {
     try {
       await axios.post(
@@ -45,7 +45,7 @@ const DataProvider = ({ children }) => {
     } catch (err) {
       // console.error('Error setting JWT token:', err)
     } finally {
-      setLoading(false)
+      // setLoading(false)
     }
   }
 
@@ -53,18 +53,21 @@ const DataProvider = ({ children }) => {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser?.email) {
+        // console.log('if...')
         setUser(currentUser); // Set user immediately for UI purposes
         await setJWTToken(currentUser.email); // Set JWT token
         setLoading(false); // Set loading to false after JWT is set
       } else {
+        setLoading(true)
         axios.post(`https://vocabulary-learning-server-taupe.vercel.app/logout`, {}, {
           withCredentials: true
         })
           .then(() => {
             setUser(null);
+          })
+          .finally(() => {
             setLoading(false);
           })
-
       }
     });
 
@@ -72,6 +75,14 @@ const DataProvider = ({ children }) => {
       unSubscribe();
     };
   }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent border-solid rounded-full animate-spin"></div>
+      </div>
+    )
+  }
 
 
   // useEffect(() => {

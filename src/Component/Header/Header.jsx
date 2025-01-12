@@ -20,8 +20,8 @@ const Header = () => {
 
 
     return (
-        <header >
-            <div className="shadow-md">
+        <header className='bg-blue-100 sticky top-0 z-50'>
+            <div className="">
                 {/* welcome message when logged in */}
                 {/* {user && (
                     <div className="bg-green-500 text-white text-center py-2">
