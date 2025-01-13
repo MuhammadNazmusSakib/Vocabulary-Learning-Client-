@@ -16,7 +16,7 @@ const WhyLearnWithLingo = () => {
       {/* Right Section - Text Content */}
       <div className="lg:w-1/2 text-center lg:text-left text-gray-800">
         <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-          Why learn a language with Busuu?
+          Why learn a language with Lingo Bingo?
         </h2>
         <p className="text-sm uppercase font-semibold text-gray-500 mb-2">
           An interactive community

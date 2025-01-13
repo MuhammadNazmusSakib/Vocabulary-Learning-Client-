@@ -11,7 +11,7 @@ const MyProfile = () => {
     <div className={`${theme === 'dark' ? '' : ''} min-h-screen`}>
 
       {/* Profile Information Card */}
-      <div className="p-6 ">
+      <div className="max-w-7xl mx-auto p-3">
         {/* Profile Image */}
         <div className="relative flex flex-col">
           <img
@@ -46,15 +46,5 @@ const MyProfile = () => {
 
 export default MyProfile;
 
-
-{/* Update Button */ }
-{/* <div className="mt-6">
-  <button
-    onClick={() => navigate('update-profile')}
-    className="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600 transition duration-200"
-  >
-    Update Information
-  </button>
-</div> */}
 
 

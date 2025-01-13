@@ -4,7 +4,7 @@ import ProfileBar from './ProfileBar'
 
 const Profile = () => {
     return (
-        <div className="flex flex-col lg:flex-row">
+        <div className="max-w-5xl mx-auto flex flex-col lg:flex-row">
             {/* Sidebar */}
             <div className="lg:w-1/5 p-4 border-r-2">
                 <ProfileBar />

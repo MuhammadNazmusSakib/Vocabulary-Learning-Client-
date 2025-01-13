@@ -2,8 +2,9 @@ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/image/main-logo.png'
 import { Contex } from '../ContexApi/Contex';
+import ThemeIcon from '../Theme/ThemeIcon';
 
-const Header = () => {
+const UserNavbar = () => {
 
     const { user, logOut, toggleTheme } = useContext(Contex)
 
@@ -21,30 +22,26 @@ const Header = () => {
     }
 
 
-
-
     return (
-        <header className='bg-gradient-to-tr from-blue-600 to-purple-500 sticky top-0 z-50'>
-            <div className="max-w-7xl mx-auto text-white">
+        <header className='bg-purple-50 sticky top-0 z-50 shadow-lg'>
+            <div className="max-w-5xl mx-auto text-gray-800">
 
                 <div className="container mx-auto flex items-center justify-between px-4 py-4">
                     {/* Navbar Start: Logo */}
-                    <div>
+                    <div className='flex lg:flex space-x-6 items-center'>
                         <Link to="/" className="text-2xl font-bold ">
-                            <div className="flex items-center">
-                                <img src={logo} className='w-10' />
-                                <h1>Lingo Bingo</h1>
-                            </div>
+                            {/* <div className="flex items-center"> */}
+                                <img src={logo} className='w-10 md:ml-8' />
+                                {/* <h1>Lingo Bingo</h1> */}
+                            {/* </div> */}
                         </Link>
+                        {/* Navbar Center: Links for larger screens */}
+                        <nav className="hidden lg:flex space-x-6">
+                            {/* <Link to="/" className="font-semi-bold hover:text-blue-950">Home</Link> */}
+                            <Link to="/lesson" className="font-semi-bold hover:text-blue-950">Start Learning</Link>
+                            <Link to="/tutorials" className="font-semi-bold hover:text-blue-950">Tutorials</Link>
+                        </nav>
                     </div>
-
-                    {/* Navbar Center: Links for larger screens */}
-                    {/* <nav className="hidden lg:flex space-x-6">
-                        <Link to="/" className="font-semi-bold hover:text-blue-950">Home</Link>
-                        <Link to="/lesson" className="font-semi-bold hover:text-blue-950">Start Learning</Link>
-                        <Link to="/tutorials" className="font-semi-bold hover:text-blue-950">Tutorials</Link>
-                    </nav> */}
-
 
                     {/* Navbar End: Login Button */}
                     <div className="hidden lg:flex items-center gap-5">
@@ -93,6 +90,8 @@ const Header = () => {
                                 </Link>
                             )
                         }
+                        {/* light/dark theme */}
+                        <ThemeIcon toggleTheme={toggleTheme} />
 
                     </div>
 
@@ -173,4 +172,5 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default UserNavbar;
+

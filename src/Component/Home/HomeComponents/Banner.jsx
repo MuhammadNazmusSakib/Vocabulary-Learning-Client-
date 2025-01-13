@@ -1,6 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Contex } from "../../ContexApi/Contex";
+import { useNavigate } from "react-router-dom";
 
 const Banner = () => {
+  const {user} = useContext(Contex)
+  const navigate = useNavigate()
+
+  const GoToLearning = () => {
+    if (!user) {
+     navigate('/login')
+     return
+    }
+    else {
+      navigate('/lesson')
+    }
+  }
+
+  
   return (
     <div className="bg-gradient-to-br from-blue-600 to-purple-500 text-white font-sans">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between p-8 ">
@@ -13,7 +29,7 @@ const Banner = () => {
           Get access to compact lessons from the experts and connect with a
           community of native speakers to help you master words faster.
         </p>
-        <button className="px-6 py-3 bg-green-400 text-black font-semibold rounded-lg hover:bg-green-300 transition duration-300">
+        <button onClick={() => GoToLearning()} className="px-6 py-3 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-300 transition duration-300">
           Learn for free
         </button>
       </div>

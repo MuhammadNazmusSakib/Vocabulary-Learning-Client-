@@ -22,8 +22,8 @@ const Login = () => {
         const user = result.user
         setUser(user)
 
-        const redirectPath = location.state?.from || "/"
-        navigate(redirectPath)
+        // const redirectPath = location.state?.from || "/"
+        navigate('/lesson')
       })
       .catch(() => {
         toast('Google login Failed. Please try again.');

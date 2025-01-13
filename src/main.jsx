@@ -23,6 +23,7 @@ import UpdateProfile from './Component/PrivateRoutes/PrivateRouteComponents/Upda
 import ErrorPage from './Component/Routes/ErrorPage/ErrorPage';
 import ForgotPassword from './Component/Routes/SignIn&SignUp/ForgotPassword';
 import Profile from './Component/PrivateRoutes/PrivateRouteComponents/Profile/Profile';
+import UserRoot from './Component/UserRoot/UserRoot';
 
 
 
@@ -49,18 +50,13 @@ const router = createBrowserRouter([
         path: "/forgot-password",
         element: <ForgotPassword />
       },
-      {
-        path: "/lesson",
-        element: <LessonsPage />
-      },
-      {
-        path: "/lesson/:difficulty",
-        element: (
-          <PrivateRoute>
-            <LessonDetail />
-          </PrivateRoute>
-        )
-      },
+    ],
+  },
+  {
+    path: "/",
+    element: <UserRoot />,
+    errorElement: <ErrorPage />,
+    children: [
       {
         path: 'my-profile',
         element: (<PrivateRoute><Profile /></PrivateRoute>),
@@ -77,7 +73,19 @@ const router = createBrowserRouter([
             path: "dashboard",
             element: <Dashboard />
           },
-        ]
+        ],
+      },
+      {
+        path: "/lesson",
+        element: <LessonsPage />
+      },
+      {
+        path: "/lesson/:difficulty",
+        element: (
+          <PrivateRoute>
+            <LessonDetail />
+          </PrivateRoute>
+        )
       },
       {
         path: "/tutorials",
@@ -87,8 +95,10 @@ const router = createBrowserRouter([
           </PrivateRoute>
         )
       },
-    ],
+    ]
   },
+
+
 
 ]);
 

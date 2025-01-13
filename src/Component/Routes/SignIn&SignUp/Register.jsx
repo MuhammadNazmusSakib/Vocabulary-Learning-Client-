@@ -44,8 +44,8 @@ const Register = () => {
 
         updateUserProfile({ displayName: name, photoURL: photo })
           .then(() => {
-            const redirectPath = location.state?.from || "/"
-            navigate(redirectPath)
+            // const redirectPath = location.state?.from || "/"
+            navigate('/lesson')
           }).catch(() => {
             toast("Failed!!")
           })
@@ -70,8 +70,8 @@ const Register = () => {
         const user = result.user
         setUser(user)
 
-        const redirectPath = location.state?.from || "/"
-        navigate(redirectPath)
+        // const redirectPath = location.state?.from || "/"
+        navigate('/lesson')
       })
       .catch(() => {
         toast('Google login Failed. Please try again.');

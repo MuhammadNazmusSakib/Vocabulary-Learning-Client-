@@ -9,7 +9,7 @@ const LessonsPage = () => {
 
 
   return (
-    <section className={`${theme === 'dark' ? '' : 'bg-indigo-100'}`}>
+    <section className={`${theme === 'dark' ? '' : ''}`}>
       <div className="container mx-auto py-10 px-4">
         {/* Page Title */}
         <div className="flex items-center text-4xl font-bold justify-center gap-3 mb-12">
@@ -18,12 +18,12 @@ const LessonsPage = () => {
         </div>
 
         {/* Lessons Section */}
-        <section className={`${theme === 'dark' ? 'text-black' : 'bg-blue-100'} py-16 px-6`}>
+        <section className={`${theme === 'dark' ? 'text-black' : ''} py-16 px-3 md:px-6`}>
           <div className="max-w-5xl mx-auto text-center">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-8">
               {/* Lesson 1 */}
               <Link to={`/lesson/easy`}>
-                <div className="bg-white h-full shadow-lg rounded-lg overflow-hidden">
+                <div className="bg-white h-full shadow-xl border rounded-lg overflow-hidden">
                   <img
                     src="https://i.ibb.co.com/t3pGkGs/a1a2.jpg"
                     alt="Lesson 1"
@@ -39,7 +39,7 @@ const LessonsPage = () => {
               </Link>
               {/* Lesson 2 */}
               <Link to={`/lesson/medium`}>
-                <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+                <div className="bg-white shadow-xl border rounded-lg overflow-hidden">
                   <img
                     src="https://i.ibb.co.com/74Z4scG/B1B2.webp"
                     alt="Lesson 2"
@@ -55,7 +55,7 @@ const LessonsPage = () => {
               </Link>
               {/* Lesson 3 */}
               <Link to={`/lesson/difficult`}>
-                <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+                <div className="bg-white shadow-xl border rounded-lg overflow-hidden">
                   <img
                     src="https://i.ibb.co.com/Nmjj84j/C1C2.jpg"
                     alt="Lesson 3"
@@ -70,7 +70,7 @@ const LessonsPage = () => {
                 </div>
               </Link>
               {/* Lesson 4 */}
-              <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+              <div className="bg-white shadow-xl border rounded-lg overflow-hidden">
                 <img
                   src="https://i.ibb.co.com/SV9MQXq/TEACHER.jpg"
                   alt="Lesson 3"

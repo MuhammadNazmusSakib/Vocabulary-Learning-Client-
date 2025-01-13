@@ -23,7 +23,7 @@ const Dashboard = () => {
         setCountMedium(res.data.filter(item => item.difficulty === 'medium').length)
         setCountDifficult(res.data.filter(item => item.difficulty === 'difficult').length)
       })
-      .finally(() =>  {
+      .finally(() => {
         setLoadingAll(false)
       })
   }, [])
@@ -35,9 +35,9 @@ const Dashboard = () => {
         setCompletedMedium(res.data.filter(item => item.difficulty === 'medium').length)
         setCompletedDifficult(res.data.filter(item => item.difficulty === 'difficult').length)
       })
-      .finally(() =>  {
-      setLoading(false)
-    })
+      .finally(() => {
+        setLoading(false)
+      })
     // console.log('easy: ', completedEasy)
     // console.log('medium: ', completedMedium)
     // console.log('difficult', completedDifficult)
@@ -46,9 +46,9 @@ const Dashboard = () => {
 
   if (loading || loadingAll) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
-        <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent border-solid rounded-full animate-spin"></div>
-      </div>
+        <div className="max-w-7xl mx-auto flex items-center justify-center min-h-screen">
+          <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent border-solid rounded-full animate-spin"></div>
+        </div>
     )
   }
 
@@ -98,10 +98,10 @@ const Dashboard = () => {
 
 
   return (
-    <div className={`${theme === 'dark' ? '' : ''} min-h-screen pl-3`}>
+    <div className={`${theme === 'dark' ? '' : ''} min-h-screen`}>
 
       {/* Profile Information Card */}
-      <div className="p-6 border-b-2">
+      <div className="p-3 border-b-2">
         {/* Profile Image */}
         <div className="flex flex-col">
           <img

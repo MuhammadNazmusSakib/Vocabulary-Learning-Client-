@@ -209,7 +209,7 @@ const LessonDetail = () => {
   }
 
   return (
-    <div className="container mx-auto py-10 px-4">
+    <div className="max-w-5xl mx-auto py-10 px-4">
       {/* Page Title */}
       <div className="flex items-center text-4xl font-bold justify-center gap-3 mb-12">
         <h1>Lesson {difficulty}</h1>

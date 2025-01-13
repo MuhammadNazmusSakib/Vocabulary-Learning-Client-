@@ -8,8 +8,8 @@ const Tutorial = () => {
   const {theme} = useContext(Contex)
 
   return (
-    <div className={`${theme === 'dark' ? '' : 'bg-indigo-100'}min-h-screen py-10 px-5`}>
-
+    <div className={`${theme === 'dark' ? '' : ''} min-h-screen py-10 px-5`}>
+      <div className='max-w-5xl mx-auto'>
       {/* Header */}
       <h1 className="text-3xl font-bold text-center text-blue-600 mb-10">
         Welcome to the Tutorial Page!
@@ -125,6 +125,7 @@ const Tutorial = () => {
         >
           Learn Vocabularies
         </button>
+      </div>
       </div>
     </div>
   );
