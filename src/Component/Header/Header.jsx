@@ -38,16 +38,9 @@ const Header = () => {
                         </Link>
                     </div>
 
-                    {/* Navbar Center: Links for larger screens */}
-                    {/* <nav className="hidden lg:flex space-x-6">
-                        <Link to="/" className="font-semi-bold hover:text-blue-950">Home</Link>
-                        <Link to="/lesson" className="font-semi-bold hover:text-blue-950">Start Learning</Link>
-                        <Link to="/tutorials" className="font-semi-bold hover:text-blue-950">Tutorials</Link>
-                    </nav> */}
-
 
                     {/* Navbar End: Login Button */}
-                    <div className="hidden lg:flex items-center gap-5">
+                    <div className="hidden md:flex items-center gap-5">
                         {
                             user ? (
                                 <>
@@ -74,6 +67,12 @@ const Header = () => {
                                                                 My Profile
                                                             </Link>
                                                         </li>
+                                                        <li className='lg:hidden'>
+                                                            <Link to="my-profile/dashboard"
+                                                                className='block px-4 py-2 text-gray-800 hover:bg-gray-100'>
+                                                                Dashboard
+                                                            </Link>
+                                                        </li>
                                                         <li>
                                                             <span onClick={logOut}
                                                                 className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
@@ -97,7 +96,7 @@ const Header = () => {
                     </div>
 
                     {/* Burger Button for small screens */}
-                    <div className="lg:hidden flex items-center">
+                    <div className="md:hidden flex items-center">
                         <button onClick={toggleMenu} className="text-gray-600 focus:outline-none">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -121,27 +120,18 @@ const Header = () => {
             {/* Mobile Menu */}
             {isMenuOpen && (
                 <div onClick={toggleMenu} className="lg:hidden mt-3 shadow-md rounded-md p-4">
-                    {/* light/dark theme */}
-                    <div onClick={toggleTheme}>
-                        <input
-                            type="checkbox"
-                            value="synthwave"
-                            className="toggle theme-controller col-span-2 col-start-1 row-start-1 border-sky-400 bg-amber-300 [--tglbg:theme(colors.sky.500)] checked:border-blue-800 checked:bg-blue-300 checked:[--tglbg:theme(colors.blue.900)]" />
-                    </div>
+
                     <ul className="space-y-4">
-                        <li>
-                            <Link to="/" className="block  hover:text-blue-600">Home</Link>
-                        </li>
-                        <li>
-                            <Link to="/lesson" className="block  hover:text-blue-600">Start Learning</Link>
-                        </li>
-                        <li>
-                            <Link to="/tutorials" className="block  hover:text-blue-600">Tutorials</Link>
-                        </li>
 
                         {
                             user ? (
                                 <>
+                                    <li>
+                                        <Link to="/lesson" className="block  hover:text-blue-600">Start Learning</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/tutorials" className="block  hover:text-blue-600">Tutorials</Link>
+                                    </li>
                                     <li>
                                         <Link to="my-profile" className=" hover:text-blue-600">
                                             My Profile
@@ -160,7 +150,7 @@ const Header = () => {
                                 </>
                             ) : (
                                 <li>
-                                    <Link to="/login" className="block text-gray-600 hover:text-blue-600">
+                                    <Link to="/login" className="block hover:text-blue-600">
                                         Login
                                     </Link>
                                 </li>

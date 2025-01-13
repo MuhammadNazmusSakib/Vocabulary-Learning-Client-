@@ -81,8 +81,8 @@ const Login = () => {
 
 
   return (
-    <div className={`${theme === 'dark' ? '' : 'bg-green-200'} flex justify-center items-center min-h-screen`}>
-      <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
+    <div className={`${theme === 'dark' ? '' : 'bg-purple-100'} flex justify-center items-center min-h-screen`}>
+      <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-xl">
         {/* Title */}
         <h1 className="text-2xl font-bold text-center mb-6">
           Log in to Lingo Bingo
@@ -92,7 +92,7 @@ const Login = () => {
         <div className="w-full mb-4">
           <button
             onClick={handleGoogleLogin}
-            className="flex gap-4 w-full justify-center items-center bg-green-500 text-white px-4 py-2 rounded-lg shadow hover:bg-green-600 mr-2"
+            className="flex gap-4 w-full justify-center items-center bg-gradient-to-tr from-blue-600 to-purple-500 text-white px-4 py-2 rounded-lg shadow mr-2"
           >
             <img
               src="https://img.icons8.com/color/24/google-logo.png"
@@ -124,7 +124,7 @@ const Login = () => {
               type="email"
               id="email"
               name="email"
-              className="bg-gray-200 w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="bg-gray-200 w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
               placeholder="Enter your email"
             />
           </div>
@@ -139,7 +139,7 @@ const Login = () => {
               type={!seePassword? "password" : "text"}
               id="password"
               name="password"
-              className="bg-gray-200 w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="bg-gray-200 w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
               placeholder="Enter your password"
             />
             <buttton onClick={handleSeePassword} className="absolute mt-2 -ml-10 text-2xl">
@@ -159,14 +159,14 @@ const Login = () => {
               </span>
             </label> */}
             <button onClick={handleNavigateToForgotPassword}
-              className="text-sm text-green-500 hover:underline"
+              className="text-sm text-purple-600 hover:underline"
             >
               Forgot your password?
             </button>
           </div>
           <button
             type="submit"
-            className="w-full bg-green-500 text-white py-2 rounded-lg font-semibold hover:bg-green-600"
+            className="w-full bg-gradient-to-tr from-blue-600 to-purple-500 text-white py-2 rounded-lg font-semibold"
           >
             Log in
           </button>
@@ -176,7 +176,7 @@ const Login = () => {
         <p className="text-center text-sm text-gray-700 mt-4">
           Don't have an account yet?{" "}
           <button onClick={handleNavigateToRegister}>
-            <p className="text-green-500 font-medium hover:underline">
+            <p className="text-purple-600 font-medium hover:underline">
               Sign up. It's free and takes five seconds.
             </p>
           </button>

@@ -79,8 +79,8 @@ const Register = () => {
   };
 
   return (
-    <div className={`${theme === 'dark' ? '' : 'bg-green-200'} flex items-center justify-center min-h-screen`}>
-      <div className="bg-white shadow-md rounded-lg px-8 py-6 w-full max-w-md">
+    <div className={`${theme === 'dark' ? '' : 'bg-purple-100'} flex items-center justify-center min-h-screen`}>
+      <div className="bg-white shadow-md rounded-lg px-8 py-6 w-full max-w-xl">
         <h2 className="text-2xl font-bold mb-6 text-center">Register</h2>
         <form onSubmit={handleSubmit}>
           {/* Name Input */}
@@ -93,7 +93,7 @@ const Register = () => {
               name="name"
               type="text"
               placeholder="Enter your name"
-              className="bg-gray-200 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="bg-gray-200 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
               required
             />
           </div>
@@ -108,7 +108,7 @@ const Register = () => {
               name="email"
               type="email"
               placeholder="Enter your email"
-              className="bg-gray-200 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="bg-gray-200 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
               required
             />
           </div>
@@ -123,7 +123,7 @@ const Register = () => {
               name="photo"
               type="url"
               placeholder="Enter a photo URL"
-              className="bg-gray-200 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required
+              className="bg-gray-200 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" required
             />
           </div>
 
@@ -137,7 +137,7 @@ const Register = () => {
               name="password"
               type={!seePassword ? "password" : "text"}
               placeholder="Enter your password"
-              className="bg-gray-200 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="bg-gray-200 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
               required
             />
             <buttton onClick={handleSeePassword} className="absolute mt-2 -ml-10 text-2xl">
@@ -154,7 +154,7 @@ const Register = () => {
           {/* Register Button */}
           <button
             type="submit"
-            className="w-full bg-green-500 text-white font-bold py-2 px-4 rounded-md hover:bg-green-600 transition duration-200"
+            className="w-full bg-gradient-to-tr from-blue-600 to-purple-500 text-white font-bold py-2 px-4 rounded-md transition duration-200"
           >
             Register
           </button>
@@ -163,7 +163,7 @@ const Register = () => {
         {/* Social Login */}
         <div className="text-center mt-6">
           <button
-            className="flex items-center justify-center w-full bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition duration-200"
+            className="flex items-center justify-center w-full bg-gradient-to-tr from-blue-600 to-purple-500 text-white py-2 px-4 rounded-md transition duration-200"
             onClick={handleGoogleLogin}
           >
             Sign up with Google
@@ -174,7 +174,7 @@ const Register = () => {
         <div className="text-center text-sm text-gray-600 mt-4">
           Already have an account?{' '}
           <button
-            className="text-blue-500 hover:underline"
+            className="text-purple-600 hover:underline"
             onClick={() => navigate('/login')}
           >
             Log in
